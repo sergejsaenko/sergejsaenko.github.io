@@ -1,2 +1,2 @@
-# First_Website.2
+# Small website for personal education
  
