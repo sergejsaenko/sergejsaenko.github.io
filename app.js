@@ -23,15 +23,4 @@ const navSlide = () => {
   });
 };
 
-// JavaScript, um die .html Erweiterung aus den Links zu entfernen
-window.addEventListener("DOMContentLoaded", () => {
-  const links = document.querySelectorAll(".nav-links a");
-  links.forEach((link) => {
-    const href = link.getAttribute("href");
-    if (href && href.endsWith(".html")) {
-      link.setAttribute("href", href.slice(0, -5)); // Entfernt die letzten 5 Zeichen (.html)
-    }
-  });
-});
-
 navSlide();
