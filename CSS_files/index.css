@@ -6,14 +6,25 @@ html, body{
   overflow: hidden;
 }
 nav{
+  position: absolute;
   display: flex;
-  width: 100%;
+  width: 98%;
   justify-content: space-around;
   align-items: center;
   min-height: 8vh;
-  background-color: #292929;
+  top:1%;
+  left: 1%;
+  right: 1%;
   font-family: 'Poppins', sans-serif;
   filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0,0,0,0.5));
+}
+.glass_effect{
+  background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.18);
+  box-shadow: 0 8px 32px 0 rgba(0,0,0,0.37);
 }
 .logo{
   color: rgb(226,226,226);
