@@ -17,6 +17,7 @@ nav{
   right: 1%;
   font-family: 'Poppins', sans-serif;
   filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0,0,0,0.5));
+  z-index: 100;
 }
 .glass_effect{
   background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
@@ -40,6 +41,7 @@ nav{
   display: flex;
   justify-content: space-around;
   width: 30%;
+  z-index: 101;
 }
 .nav-links li{
   list-style: none;
@@ -62,7 +64,7 @@ nav{
   margin: 5px;
   transition: all 0.3s ease;
 }
-@media screen and (max-width:425px){
+@media screen and (max-width:500px){
   body{
     overflow-x: hidden;
   }
@@ -86,7 +88,7 @@ nav{
     display: block;
   }
 }
-@media screen and (max-width:375px){
+@media screen and (max-width:400px){
   body{
     overflow-x: hidden;
   }
@@ -110,7 +112,7 @@ nav{
     display: block;
   }
 }
-@media screen and (max-width:320px){
+@media screen and (max-width:300px){
   body{
     overflow-x: hidden;
   }
