@@ -31,10 +31,9 @@ const navSlide = () => {
     burger.classList.toggle("toggle");
   });
 
-  // Listen for the window resize event
+  // Listen for the window resize event & deactivate nav when size > 768px
   window.addEventListener("resize", () => {
     if (window.innerWidth > 768) {
-      // Deactivate the navigation when the screen is wider than 768px
       deactivateNav();
     }
   });
