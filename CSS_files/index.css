@@ -4,6 +4,7 @@ html, body{
   margin: 0px;
   padding: 0px;
   overflow: hidden;
+  font-family: "Roboto";
 }
 nav{
   position: absolute;
@@ -15,14 +16,15 @@ nav{
   top:1%;
   left: 1%;
   right: 1%;
-  font-family: 'Poppins', sans-serif;
   filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0,0,0,0.5));
   z-index: 100;
 }
 .glass_effect{
   background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
-  backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+  -moz-backdrop-filter: blur(10px);
+  -ms-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
   border-radius: 20px;
   border: 1px solid rgba(255,255,255,0.18);
   box-shadow: 0 8px 32px 0 rgba(0,0,0,0.37);
@@ -72,9 +74,8 @@ nav{
   .nav-links{
     position: absolute;
     right: 0px;
-    height: 90vh;
+    height: 40vh;
     top: 8vh;
-    background-color: #292929;
     flex-direction: column;
     align-items: center;
     width: 0%;
@@ -88,36 +89,36 @@ nav{
   .burger{
     display: block;
   }
-}
-.nav-active{
-  transform: translateX(0%);
-  width: 50%;
-}
-@keyframes navLinkFade{
-  from{
+  .nav-active{
+    transform: translateX(0%);
+    width: 30%;
+  }
+  @keyframes navLinkFade{
+    from{
+      opacity: 0;
+      transform: translateX(50px);
+    }
+    to{
+      opacity: 1;
+      transform: translateX(0px);
+    }
+  }
+  .toggle .line1{
+    transform: rotate(-45deg) translate(-5px,6px);
+  }
+  .toggle .line2{
     opacity: 0;
-    transform: translateX(50px);
   }
-  to{
-    opacity: 1;
-    transform: translateX(0px);
+  .toggle .line3{
+    transform: rotate(45deg) translate(-5px,-6px); 
   }
-}
-.toggle .line1{
-  transform: rotate(-45deg) translate(-5px,6px);
-}
-.toggle .line2{
-  opacity: 0;
-}
-.toggle .line3{
-  transform: rotate(45deg) translate(-5px,-6px); 
-}
-@keyframes slide {
-  0% {
-    transform:translateX(-25%);
-  }
-  100% {
-    transform:translateX(25%);
+  @keyframes slide {
+    0% {
+      transform:translateX(-25%);
+    }
+    100% {
+      transform:translateX(25%);
+    }
   }
 }
 .background{
