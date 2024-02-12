@@ -1,25 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <link rel="stylesheet" href="./CSS_files/index.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-    <title>Scaffiz</title>
-    <link rel="icon" type="images/x-icon" href="./Pictures/logo_generated_first_try.png"
-  </head>
-  <body>
-    <p>Test page "about"</p>
-    <ul>
-      <li>
-        <a href="/index.html" style="color: black; font-size: 20px">Home</a>
-      </li>
-      <li>
-        <a href="./page2.html" style="color: black; font-size: 20px">Page2</a>
-      </li>
-      <li>
-        <a href="./page3.html" style="color: black; font-size: 20px">Page3</a>
-      </li>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/CSS_files/about.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
+<title>Scaffiz - About</title>
+<link rel="icon" type="image/x-icon" href="/Media/logo_generated_first_try.png" />
+</head>
+
+<body>
+  <nav class="glass_effect">
+    <div class="logo">
+      <h4><a href="about.html">Scaffiz</a></h4>
+    </div>
+    <ul class="nav-links">
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="./HTML_files/page2.html">Page2</a></li>
+      <li><a href="./HTML_files/page3.html">Page3</a></li>
+      <li><a href="https://www.google.com" target="_blank">Google</a></li>
     </ul>
-  </body>
+    <div class="burger">
+      <div class="line1"></div>
+      <div class="line2"></div>
+      <div class="line3"></div>
+    </div>
+  </nav>
+  <textbox class="glass_effect">
+    <p class="centered_text">
+      Diese Webseite ist mein kleines Projekt, bei dem ich lerne, wie man Webseiten gestaltet und sie für andere im Internet zugänglich macht. Es ist eine persönliche Reise, bei der ich neue Fähigkeiten entwickle und meine Arbeit mit anderen teilen möchte.
+    </p>
+    <p class="centered_text">
+      Mein Name ist Sergej, ich bin 25 Jahre alt und studiere derzeit Ingenieurinformatik im Bachelor. In meiner Freizeit spiele ich gerne Videospiele und gehe regelmäßig ins Fitnessstudio.
+    </p>
+  </textbox>
+  <div>
+    <video autoplay muted loop playsinline class="background_video">
+      <source src="/Media/index_wallpaper.mp4" type="video/mp4"/>
+    </video>
+  </div>
+</div>
+<script src="app.js"></script>
+</body>
 </html>
