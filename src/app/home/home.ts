@@ -8,5 +8,5 @@ import { About } from '../components/about/about';
   styleUrl: './home.css'
 })
 export class Home {
-
+ 
 }
