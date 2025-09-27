@@ -1,49 +1,45 @@
+import { OnInit, OnDestroy } from '@angular/core';
 
-import { Component, AfterViewInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 
 @Component({
   selector: 'app-header',
+  standalone: true,
   imports: [RouterLink],
   templateUrl: './header.html',
-  styleUrl: './header.css'
+  styleUrls: ['./header.css']
 })
-export class Header implements AfterViewInit {
-  ngAfterViewInit() {
-    const burger = document.querySelector('.burger');
-    const nav = document.querySelector('.nav-links');
-    const navLinks = document.querySelectorAll('.nav-links li');
+export class Header implements OnInit, OnDestroy {
+  menuOpen = false;
+  isMobile = window.innerWidth <= 768;
+  private resizeListener = () => {
+    this.isMobile = window.innerWidth <= 768;
+    if (!this.isMobile) {
+      this.menuOpen = false;
+      document.body.style.overflowX = '';
+    }
+  };
 
-    const deactivateNav = () => {
-      nav?.classList.remove('nav-active');
-      nav?.classList.remove('glass_effect');
-      navLinks.forEach((link) => {
-        (link as HTMLElement).style.animation = '';
-      });
-      burger?.classList.remove('toggle');
-    };
+  ngOnInit() {
+    window.addEventListener('resize', this.resizeListener);
+    this.isMobile = window.innerWidth <= 768;
+  }
 
-    burger?.addEventListener('click', () => {
-      nav?.classList.toggle('nav-active');
-      nav?.classList.toggle('glass_effect');
+  ngOnDestroy() {
+    window.removeEventListener('resize', this.resizeListener);
+  }
 
-      navLinks.forEach((link, index) => {
-        const el = link as HTMLElement;
-        if (el.style.animation) {
-          el.style.animation = '';
-        } else {
-          el.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
-        }
-      });
+  toggleMenu() {
+    this.menuOpen = !this.menuOpen;
+    document.body.style.overflowX = this.menuOpen ? 'hidden' : '';
+  }
 
-      burger.classList.toggle('toggle');
-    });
-
-    window.addEventListener('resize', () => {
-      if (window.innerWidth > 768) {
-        deactivateNav();
-      }
-    });
+  closeMenuOnOverlay(event: Event) {
+    if ((event.target as HTMLElement).classList.contains('header-container')) {
+      this.menuOpen = false;
+      document.body.style.overflowX = '';
+    }
   }
 }

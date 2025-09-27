@@ -1,3 +1,4 @@
+
 nav {
   position: absolute;
   display: flex;
@@ -5,6 +6,7 @@ nav {
   justify-content: space-around;
   align-items: center;
   min-height: 8vh;
+  overflow: hidden;
   top: 1%;
   left: 1%;
   right: 1%;
@@ -18,12 +20,8 @@ nav {
   letter-spacing: 5px;
   font-size: 20px;
   font-weight: bold;
-  cursor: pointer;
-}
-
-.logo a, .logo span {
   text-decoration: none;
-  color: inherit;
+  cursor: pointer;
 }
 
 .nav-links {
@@ -32,13 +30,7 @@ nav {
   width: 300px;
   z-index: 101;
   padding: 0;
-}
-
-.nav-links li {
   list-style: none;
-}
-
-.nav-links a, .nav-links li[routerLink] {
   color: rgb(226, 226, 226);
   text-decoration: none;
   letter-spacing: 3px;
@@ -48,7 +40,7 @@ nav {
 }
 
 .burger {
-  display: none;
+  display: block;
   cursor: pointer;
 }
 
@@ -61,37 +53,53 @@ nav {
 }
 
 @media screen and (max-width: 768px) {
-  html, body {
-    overflow-x: hidden !important;
-  }
-
-  .nav-links {
-    padding: 0;
-    position: absolute;
-    right: 0;
-    height: 40vh;
-    top: 8vh;
-    flex-direction: column;
-    align-items: center;
-    width: 0;
-    max-width: 100vw;
-    overflow-x: hidden;
-    transform: translateX(100%);
-    transition: transform 0.5s ease-in;
-    filter: drop-shadow(0rem 1rem 0.5rem rgba(0, 0, 0, 0.5));
-  }
-
-  .nav-links li {
-    opacity: 0;
-  }
-
   .burger {
     display: block;
   }
 
-  .nav-active {
-    transform: translateX(0);
-    width: 30%;
+  .header-container {
+    display: flex;
+    position: absolute;
+    margin-right: 1%;
+    margin-top: 10%;
+    z-index: 99;
+    right: 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    animation: slideInRight 0.4s cubic-bezier(0.77,0,0.18,1) forwards;
+  }
+
+  .header-container .nav-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 20vh;
+    height: 25vh;
+  }
+
+  .header-container .nav-links li {
+    opacity: 0;
+    font-size: 1.3em;
+    letter-spacing: 2px;
+    animation: navLinkFade 0.5s ease forwards;
+  }
+
+  .header-container .nav-links li:nth-child(1) { animation-delay: 0.3s; }
+  .header-container .nav-links li:nth-child(2) { animation-delay: 0.45s; }
+  .header-container .nav-links li:nth-child(3) { animation-delay: 0.6s; }
+  .header-container .nav-links li:nth-child(4) { animation-delay: 0.75s; }
+
+  .toggle .line1 {
+    transform: rotate(-45deg) translate(-5px, 6px);
+  }
+
+  .toggle .line2 {
+    opacity: 0;
+  }
+
+  .toggle .line3 {
+    transform: rotate(45deg) translate(-5px, -6px);
   }
 
   @keyframes navLinkFade {
@@ -106,25 +114,14 @@ nav {
     }
   }
 
-  .toggle .line1 {
-    transform: rotate(-45deg) translate(-5px, 6px);
-  }
-
-  .toggle .line2 {
-    opacity: 0;
-  }
-
-  .toggle .line3 {
-    transform: rotate(45deg) translate(-5px, -6px);
-  }
-
-  @keyframes slide {
-    0% {
-      transform: translateX(-25%);
+  @keyframes slideInRight {
+    from {
+      transform: translateX(100vw);
+      opacity: 0.7;
     }
-
-    100% {
-      transform: translateX(25%);
+    to {
+      transform: translateX(0);
+      opacity: 1;
     }
   }
 }
