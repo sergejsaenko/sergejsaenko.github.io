@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { About } from '../components/about/about';
 
 @Component({
   selector: 'app-home',
-  imports: [],
+  imports: [About],
   templateUrl: './home.html',
   styleUrl: './home.css'
 })

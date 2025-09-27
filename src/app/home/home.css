@@ -1,0 +1,6 @@
+
+/* Abstand zur Navbar oben */
+body, :host {
+	display: block;
+	padding-top: 9vh;
+}
