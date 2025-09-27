@@ -8,4 +8,10 @@ export const routes: Routes = [
             return import('./home/home').then(m => m.Home);
         },
     },
+    {
+        path: 'about',
+        loadComponent() {
+            return import('./components/about/about').then(m => m.About);
+        },
+    },
 ];
