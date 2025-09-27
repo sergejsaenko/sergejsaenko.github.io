@@ -1,0 +1,10 @@
+.centered_text {
+  text-align: center;
+  color: rgb(226, 226, 226);
+  font-size: 16px;
+  margin: 5vmin;
+}
+
+.glass_effect {
+  margin-top: 20vh;
+}
