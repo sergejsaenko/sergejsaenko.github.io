@@ -3,10 +3,12 @@ import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http';
+import { provideTranslocoService } from './transloco-loader';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideHttpClient(),
+    provideTranslocoService(),
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes)

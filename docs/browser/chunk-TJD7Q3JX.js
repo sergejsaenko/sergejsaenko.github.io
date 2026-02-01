@@ -1,1 +1,0 @@
-import{va as t}from"./chunk-LTPG76YC.js";var n=class e{static \u0275fac=function(o){return new(o||e)};static \u0275cmp=t({type:e,selectors:[["app-home"]],decls:0,vars:0,template:function(o,m){},styles:["body[_ngcontent-%COMP%], [_nghost-%COMP%]{display:block;padding-top:9vh}"]})};export{n as Home};

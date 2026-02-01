@@ -11,5 +11,6 @@
   margin-right: auto;
   max-width: 420px;
   min-width: 260px;
+  min-height: 200px;
   height: auto;
 }
