@@ -9,7 +9,7 @@
     "test": "ng test",
     "i18n:extract": "transloco-keys-manager extract",
     "i18n:find": "transloco-keys-manager find",
-    "prepare": "husky"
+    "husky": "husky"
   },
   "prettier": {
     "printWidth": 100,

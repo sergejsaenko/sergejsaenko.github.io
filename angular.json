@@ -26,7 +26,12 @@
               },
               {
                 "glob": "**/*",
-                "input": "src/assets"
+                "input": "src/shared/assets"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/app/features/about/core/assets/i18n",
+                "output": "i18n/about"
               }
             ],
             "styles": [
