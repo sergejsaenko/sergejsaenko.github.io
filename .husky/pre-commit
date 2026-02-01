@@ -1,0 +1,6 @@
+branch="$(git rev-parse --abbrev-ref HEAD)"
+
+if [ "$branch" = "master" ] || [ "$branch" = "develop" ]; then
+  echo "Fehler: Direkte Commits auf '$branch' sind nicht erlaubt!"
+  exit 1
+fi
