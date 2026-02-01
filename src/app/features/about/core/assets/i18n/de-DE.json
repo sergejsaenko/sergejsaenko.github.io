@@ -1,6 +1,6 @@
 {
-  "ABOUT": {
-    "TITLE": "Über uns",
-    "DESCRIPTION": "Dies ist die Über-uns-Seite."
+  "about": {
+    "title": "Über uns",
+    "description": "Dies ist die Über-uns-Seite."
   }
 }
