@@ -5,13 +5,13 @@ export const routes: Routes = [
         path: '',
         pathMatch: 'full',
         loadComponent() {
-            return import('./home/home').then(m => m.Home);
+            return import('./features/home/core/src/index').then(m => m.Home);
         },
     },
     {
         path: 'about',
         loadComponent() {
-            return import('./components/about/about').then(m => m.About);
+            return import('./features/about/core/src/index').then(m => m.About);
         },
     },
 ];

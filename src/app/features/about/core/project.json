@@ -1,0 +1,15 @@
+{
+  "name": "about-core",
+  "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "src/app/features/about/core/src",
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:ng-packagr-lite",
+      "outputs": ["{workspaceRoot}/dist/src/app/features/about/core"],
+      "options": {
+        "project": "src/app/features/about/core/ng-package.json"
+      }
+    }
+  }
+}

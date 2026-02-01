@@ -22,7 +22,7 @@
             "assets": [
               {
                 "glob": "**/*",
-                "input": "public"
+                "input": "src/shared"
               }
             ],
             "styles": [
@@ -79,7 +79,7 @@
             "assets": [
               {
                 "glob": "**/*",
-                "input": "public"
+                "input": "src/shared"
               }
             ],
             "styles": [
