@@ -42,6 +42,9 @@ jobs:
       - name: Create 404.html
         run: cp docs/index.html docs/404.html
 
+      - name: Disable Jekyll
+        run: touch docs/.nojekyll
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
