@@ -25,11 +25,18 @@
             "assets": [
               {
                 "glob": "**/*",
-                "input": "src/shared"
+                "input": "src/app/shared/assets/transloco/i18n",
+                "output": "i18n"
               },
               {
                 "glob": "**/*",
-                "input": "src/shared/assets"
+                "input": "src/app/shared/assets/icons",
+                "output": "icons"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/app/shared/assets/videos",
+                "output": "videos"
               },
               {
                 "glob": "**/*",
@@ -91,7 +98,8 @@
             "assets": [
               {
                 "glob": "**/*",
-                "input": "src/shared"
+                "input": "src/app/shared/assets/icons",
+                "output": "icons"
               }
             ],
             "styles": [
