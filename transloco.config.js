@@ -1,5 +1,5 @@
 module.exports = {
-  rootTranslationsPath: 'src/assets/i18n/',
+  rootTranslationsPath: 'src/transloco/i18n/',
   langs: ['de'],
   keysManager: {
     addMissingKeys: true,
