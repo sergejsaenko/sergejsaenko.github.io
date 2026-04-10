@@ -47,6 +47,8 @@
     "@nx/workspace": "22.6.5",
     "@schematics/angular": "^20.3.2",
     "@types/jasmine": "~5.1.0",
+    "eslint": "^10.2.0",
+    "hono": "^4.12.12",
     "husky": "^9.1.7",
     "jasmine-core": "~5.9.0",
     "karma": "~6.4.0",
@@ -55,8 +57,10 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "ng-packagr": "^20.3.2",
+    "node-fetch": "^3.3.2",
     "nx": "22.6.5",
     "prettier": "^3.8.1",
+    "react-refresh": "^0.18.0",
     "typescript": "~5.9.2"
   }
 }
