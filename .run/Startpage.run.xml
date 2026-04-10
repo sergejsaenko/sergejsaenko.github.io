@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Startpage" type="NxRunConfigurationType">
+    <option name="nx-projects" value="scaffiz_website" />
+    <option name="nx-targets" value="serve" />
+    <option name="nx-target-configuration" value="development" />
+    <envs />
+    <option name="arguments" value="--port 6060" />
+    <method v="2" />
+  </configuration>
+</component>
