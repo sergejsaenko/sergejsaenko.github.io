@@ -34,7 +34,7 @@ jobs:
         run: npm ci
 
       - name: Build project
-        run: npx ng build --configuration production --base-href ./
+        run: npx nx build scaffiz_website --configuration production --base-href ./
 
       - name: Create CNAME
         run: echo "www.scaffiz.de" > docs/CNAME
