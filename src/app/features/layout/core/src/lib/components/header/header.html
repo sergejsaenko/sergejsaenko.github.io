@@ -3,9 +3,13 @@
     <span routerLink="/">Scaffiz</span>
   </div>
   @if (!isMobile) {
-	<ul class="nav-links">
-    	<li routerLink="/about">About</li>
-  	</ul>
+    <ul class="nav-links">
+      @if (auth.isGuest()) {
+        <li routerLink="/login">Login</li>
+      } @else {
+        <li (click)="logout()">Logout</li>
+      }
+    </ul>
   }
   @if (isMobile) {
     <div class="burger" [class.toggle]="menuOpen" (click)="toggleMenu()">
@@ -20,7 +24,11 @@
 @if (menuOpen) {
   <div class="header-container" (click)="closeMenuOnOverlay($event)">
     <ul class="nav-links">
-      <li routerLink="/about">About</li>
+      @if (auth.isGuest()) {
+        <li routerLink="/login">Login</li>
+      } @else {
+        <li (click)="logout()">Logout</li>
+      }
     </ul>
   </div>
 }

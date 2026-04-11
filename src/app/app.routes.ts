@@ -9,9 +9,9 @@ export const routes: Routes = [
         },
     },
     {
-        path: 'about',
+        path: 'login',
         loadComponent() {
-            return import('./features/about/core/src/index').then(m => m.About);
+            return import('./features/auth/core/src/index').then(m => m.Login);
         },
     },
 ];

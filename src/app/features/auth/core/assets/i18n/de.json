@@ -1,14 +1,4 @@
-{
-  "auth.login.registrationSuccess": "MISSING_KEY",
-  "auth.login.registrationFailed": "MISSING_KEY",
-  "auth.login.usernameExists": "MISSING_KEY",
-  "auth.login.welcome": "MISSING_KEY",
-  "auth.login.loginFailed": "MISSING_KEY",
-  "login.registrationSuccess": "MISSING_KEY",
-  "login.registrationFailed": "MISSING_KEY",
-  "login.usernameExists": "MISSING_KEY",
-  "login.welcome": "MISSING_KEY",
-  "login.loginFailed": "MISSING_KEY",
+﻿{
   "login": {
     "title": "Anmelden",
     "signup_title": "Registrieren",
@@ -24,8 +14,5 @@
     "usernameExists": "Dieser Benutzername existiert bereits.",
     "welcome": "Willkommen zurück!",
     "loginFailed": "Anmeldung fehlgeschlagen."
-  },
-  "about": {
-    "title": "Über mich"
   }
 }
