@@ -34,9 +34,6 @@
       </button>
     </form>
 
-    @if (message()) {
-      <p class="message">{{ message() }}</p>
-    }
 
     <p class="toggle-link" (click)="toggleMode()">
       {{ isSignUp() ? 'Bereits registriert? Anmelden' : 'Noch kein Konto? Registrieren' }}

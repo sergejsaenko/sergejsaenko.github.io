@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+﻿import { Component, ElementRef, HostListener, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 
 interface ShootingStar {
   x: number; y: number; vx: number; vy: number;
@@ -73,7 +73,7 @@ export class InteractiveBackgroundComponent implements OnInit, OnDestroy {
     canvas.height = window.innerHeight;
   }
 
-  // ─── Offscreen renders ────────────────────────────────────────────────────
+  // ——— Offscreen renders ————————————————————————————————
 
   private renderBgOffscreen(): void {
     const { width: w, height: h } = this.canvasRef.nativeElement;
@@ -221,7 +221,7 @@ export class InteractiveBackgroundComponent implements OnInit, OnDestroy {
     });
   }
 
-  // ─── Init dynamic elements ────────────────────────────────────────────────
+  // ——— Init dynamic elements ————————————————————————————————
 
   private initFireflies(): void {
     const { width: w, height: h } = this.canvasRef.nativeElement;
@@ -243,7 +243,7 @@ export class InteractiveBackgroundComponent implements OnInit, OnDestroy {
     }
   }
 
-  // ─── Animation loop ───────────────────────────────────────────────────────
+  // ——— Animation loop ————————————————————————————————
 
   private animate(): void {
     const { width: w, height: h } = this.canvasRef.nativeElement;
@@ -354,3 +354,4 @@ export class InteractiveBackgroundComponent implements OnInit, OnDestroy {
     });
   }
 }
+

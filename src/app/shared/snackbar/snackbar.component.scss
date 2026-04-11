@@ -1,0 +1,39 @@
+﻿// (file moved from components/snackbar/)
+
+.snackbar {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%) translateY(0);
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  z-index: 9999;
+  white-space: nowrap;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  animation: snackbar-lifecycle 5s ease forwards;
+
+  &.success {
+    background: rgba(30, 130, 65, 0.90);
+    border: 1px solid rgba(60, 200, 100, 0.40);
+    color: rgba(220, 255, 230, 0.95);
+  }
+
+  &.error {
+    background: rgba(160, 35, 35, 0.90);
+    border: 1px solid rgba(220, 70, 70, 0.40);
+    color: rgba(255, 220, 220, 0.95);
+  }
+}
+
+// 0–6%: slide in (0–0.3s), 6–86%: visible, 86–100%: slide out (4.3–5s)
+@keyframes snackbar-lifecycle {
+  0%   { opacity: 0; transform: translateX(-50%) translateY(16px); }
+  6%   { opacity: 1; transform: translateX(-50%) translateY(0);    }
+  86%  { opacity: 1; transform: translateX(-50%) translateY(0);    }
+  100% { opacity: 0; transform: translateX(-50%) translateY(16px); }
+}
+

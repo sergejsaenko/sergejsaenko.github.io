@@ -2,6 +2,7 @@
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../../../../../../core/services/auth.service';
+import { SnackbarService } from '../../../../../../../../shared/snackbar/snackbar.service';
 
 @Component({
   selector: 'app-login',
@@ -14,38 +15,38 @@ export class Login {
   protected readonly username = signal('');
   protected readonly password = signal('');
   protected readonly isSignUp = signal(false);
-  protected readonly message = signal('');
   protected readonly loading = signal(false);
 
   constructor(
     private readonly auth: AuthService,
+    private readonly snackbar: SnackbarService,
     private readonly router: Router,
   ) {}
 
   submit(): void {
     this.loading.set(true);
-    this.message.set('');
 
     if (this.isSignUp()) {
       this.auth.signUp(this.username(), this.password()).subscribe({
         next: () => {
-          this.message.set('Registrierung erfolgreich! Du kannst dich jetzt anmelden.');
+          this.snackbar.success('Registrierung erfolgreich! Du kannst dich jetzt anmelden.');
           this.isSignUp.set(false);
           this.loading.set(false);
         },
         error: (err) => {
-          this.message.set(err.message);
+          this.snackbar.error(err.message ?? 'Registrierung fehlgeschlagen.');
           this.loading.set(false);
         },
       });
     } else {
       this.auth.signIn(this.username(), this.password()).subscribe({
         next: () => {
+          this.snackbar.success('Willkommen zurück!');
           this.loading.set(false);
           this.router.navigate(['/']);
         },
         error: () => {
-          this.message.set('Anmeldung fehlgeschlagen.');
+          this.snackbar.error('Anmeldung fehlgeschlagen.');
           this.loading.set(false);
         },
       });
@@ -54,7 +55,6 @@ export class Login {
 
   toggleMode(): void {
     this.isSignUp.update((v) => !v);
-    this.message.set('');
   }
 }
 
