@@ -25,7 +25,7 @@
   <div class="header-container" (click)="closeMenuOnOverlay($event)">
     <ul class="nav-links">
       @if (auth.isGuest()) {
-        <li routerLink="/login">Login</li>
+        <li routerLink="/login" (click)="closeMenu()">Login</li>
       } @else {
         <li (click)="logout()">Logout</li>
       }

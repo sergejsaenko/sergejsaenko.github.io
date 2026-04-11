@@ -11,7 +11,11 @@
   font-weight: 600;
   letter-spacing: 1px;
   z-index: 9999;
-  white-space: nowrap;
+  width: auto;
+  max-width: 90vw;
+  text-align: center;
+  white-space: normal;
+  overflow-wrap: break-word;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   animation: snackbar-lifecycle 5s ease forwards;
@@ -36,4 +40,3 @@
   86%  { opacity: 1; transform: translateX(-50%) translateY(0);    }
   100% { opacity: 0; transform: translateX(-50%) translateY(16px); }
 }
-

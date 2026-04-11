@@ -4,20 +4,13 @@ nav {
   width: 100%;
   box-sizing: border-box;
   justify-content: space-between;
-  align-items: flex-start;
-  padding: 22px 48px 56px;
+  align-items: center;
+  padding: 16px 32px;
   top: 0;
   left: 0;
   right: 0;
-  /* Fades from dark at top → transparent at bottom – merges with canvas */
-  background: linear-gradient(
-    to bottom,
-    rgba(8, 6, 4, 0.82) 0%,
-    rgba(8, 6, 4, 0.35) 55%,
-    rgba(8, 6, 4, 0.00) 100%
-  );
   z-index: 100;
-  pointer-events: none; /* let clicks through the transparent part */
+  background: transparent;
 }
 
 /* Re-enable pointer events only on interactive children */
@@ -95,7 +88,7 @@ nav > * {
 
 @media screen and (max-width: 768px) {
   nav {
-    padding: 22px 28px 56px;
+    padding: 12px 20px;
   }
 
   .burger {
