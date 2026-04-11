@@ -1,4 +1,4 @@
-﻿import { Component, signal } from '@angular/core';
+﻿import { Component, computed, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../../../../../../core/services/auth.service';
@@ -26,6 +26,13 @@ export class Login {
   protected readonly usernameFocused = signal(false);
   protected readonly passwordFocused = signal(false);
 
+  // Computed: hint is visible only while focused AND condition not yet met
+  protected readonly showUsernameHintLength = computed(() => this.usernameFocused() && this.username().length < 4);
+  protected readonly showUsernameHintChars  = computed(() => this.usernameFocused() && this.username().length > 0 && !this.USERNAME_PATTERN.test(this.username()));
+  protected readonly showUsernameHintDigits = computed(() => this.usernameFocused() && this.username().length > 0 && /^\d+$/.test(this.username()));
+  protected readonly showPasswordHintLength = computed(() => this.passwordFocused() && this.password().length < 6);
+  protected readonly showPasswordHintDigits = computed(() => this.passwordFocused() && this.password().length > 0 && /^\d+$/.test(this.password()));
+
   // Only letters, digits, underscore, dot, dash – no HTML/SQL special chars
   private readonly USERNAME_PATTERN = /^[a-zA-Z0-9_.\\-]+$/;
   // Reject dangerous sequences: <, >, ", ', ;, --, /* */ for SQL/HTML/JS injection
@@ -43,6 +50,7 @@ export class Login {
     const p = this.password();
 
     if (u.length < 4) return 'auth.login.usernameTooShort';
+    if (/^\d+$/.test(u)) return 'auth.login.usernameOnlyDigits';
     if (!this.USERNAME_PATTERN.test(u)) return 'auth.login.usernameInvalid';
     if (p.length < 6) return 'auth.login.passwordTooShort';
     if (/^\d+$/.test(p)) return 'auth.login.passwordOnlyDigits';

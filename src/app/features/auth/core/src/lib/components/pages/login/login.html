@@ -16,10 +16,17 @@
           autocomplete="username"
           required
         />
-        @if (usernameFocused()) {
+        @if (showUsernameHintLength() || showUsernameHintChars() || showUsernameHintDigits()) {
           <ul class="field-hints">
-            <li>{{ t('auth.login.usernameHintLength') }}</li>
-            <li>{{ t('auth.login.usernameHintChars') }}</li>
+            @if (showUsernameHintLength()) {
+              <li>{{ t('auth.login.usernameHintLength') }}</li>
+            }
+            @if (showUsernameHintChars()) {
+              <li>{{ t('auth.login.usernameHintChars') }}</li>
+            }
+            @if (showUsernameHintDigits()) {
+              <li>{{ t('auth.login.usernameHintDigits') }}</li>
+            }
           </ul>
         }
       </div>
@@ -37,10 +44,14 @@
           autocomplete="current-password"
           required
         />
-        @if (passwordFocused()) {
+        @if (showPasswordHintLength() || showPasswordHintDigits()) {
           <ul class="field-hints">
-            <li>{{ t('auth.login.passwordHintLength') }}</li>
-            <li>{{ t('auth.login.passwordHintDigits') }}</li>
+            @if (showPasswordHintLength()) {
+              <li>{{ t('auth.login.passwordHintLength') }}</li>
+            }
+            @if (showPasswordHintDigits()) {
+              <li>{{ t('auth.login.passwordHintDigits') }}</li>
+            }
           </ul>
         }
       </div>
