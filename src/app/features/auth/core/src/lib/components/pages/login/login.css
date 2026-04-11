@@ -67,6 +67,14 @@
   line-height: 1.6;
 }
 
+.field-hints .hint--error {
+  color: rgba(255, 100, 100, 0.85);
+}
+
+.field-hints--error {
+  color: rgba(255, 100, 100, 0.85);
+}
+
 button[type='submit'] {
   width: 100%;
   padding: 12px;

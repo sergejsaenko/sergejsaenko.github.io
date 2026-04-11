@@ -26,14 +26,40 @@ export class Login {
   protected readonly loading = signal(false);
   protected readonly usernameFocused = signal(false);
   protected readonly passwordFocused = signal(false);
-  protected readonly passwordConfirmFocused = signal(false);
 
   // Computed: hint visible only while focused, in signup mode, AND condition not yet met
   protected readonly showUsernameHintLength = computed(() => this.isSignUp() && this.usernameFocused() && this.username().length < 4);
   protected readonly showUsernameHintChars  = computed(() => this.isSignUp() && this.usernameFocused() && this.username().length > 0 && !this.USERNAME_PATTERN.test(this.username()));
   protected readonly showUsernameHintDigits = computed(() => this.isSignUp() && this.usernameFocused() && this.username().length > 0 && /^\d+$/.test(this.username()));
-  protected readonly showPasswordHintLength = computed(() => this.isSignUp() && this.passwordFocused() && this.password().length < 6);
-  protected readonly showPasswordHintDigits = computed(() => this.isSignUp() && this.passwordFocused() && this.password().length > 0 && /^\d+$/.test(this.password()));
+  protected readonly showPasswordHintLength  = computed(() => this.isSignUp() && this.passwordFocused() && this.password().length < 6);
+  protected readonly showPasswordHintDigits  = computed(() => this.isSignUp() && this.passwordFocused() && this.password().length > 0 && /^\d+$/.test(this.password()));
+  protected readonly showPasswordHintDanger  = computed(() => this.isSignUp() && this.passwordFocused() && this.password().length > 0 && this.DANGEROUS_PATTERN.test(this.password()));
+  protected readonly showPasswordMismatch   = computed(() => this.isSignUp() && this.passwordConfirm().length > 0 && this.password() !== this.passwordConfirm());
+
+  // True when all signup fields pass validation – enables the submit button
+  protected readonly isSignUpFormValid = computed(() => {
+    const u = this.username().trim();
+    const p = this.password();
+    return (
+      u.length >= 4 &&
+      u.length <= this.MAX_USERNAME_LENGTH &&
+      !/^\d+$/.test(u) &&
+      this.USERNAME_PATTERN.test(u) &&
+      p.length >= 6 &&
+      p.length <= this.MAX_PASSWORD_LENGTH &&
+      !/^\d+$/.test(p) &&
+      !this.DANGEROUS_PATTERN.test(p) &&
+      p === this.passwordConfirm()
+    );
+  });
+
+  // Hint is in "error" state (red) when user has typed something but condition still fails
+  protected readonly usernameHintLengthIsError = computed(() => this.username().length > 0 && this.username().length < 4);
+  protected readonly usernameHintCharsIsError  = computed(() => true); // only visible when already invalid
+  protected readonly usernameHintDigitsIsError = computed(() => true); // only visible when already invalid
+  protected readonly passwordHintLengthIsError = computed(() => this.password().length > 0 && this.password().length < 6);
+  protected readonly passwordHintDigitsIsError = computed(() => true); // only visible when already invalid
+  protected readonly passwordHintDangerIsError = computed(() => true); // only visible when already invalid
 
   // Backslash removed – only letters, digits, underscore, dot, dash
   private readonly USERNAME_PATTERN = /^[a-zA-Z0-9_.\-]+$/;

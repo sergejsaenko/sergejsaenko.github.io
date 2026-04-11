@@ -21,13 +21,13 @@
         @if (showUsernameHintLength() || showUsernameHintChars() || showUsernameHintDigits()) {
           <ul class="field-hints">
             @if (showUsernameHintLength()) {
-              <li>{{ t('auth.login.usernameHintLength') }}</li>
+              <li [class.hint--error]="usernameHintLengthIsError()">{{ t('auth.login.usernameHintLength') }}</li>
             }
             @if (showUsernameHintChars()) {
-              <li>{{ t('auth.login.usernameHintChars') }}</li>
+              <li [class.hint--error]="usernameHintCharsIsError()">{{ t('auth.login.usernameHintChars') }}</li>
             }
             @if (showUsernameHintDigits()) {
-              <li>{{ t('auth.login.usernameHintDigits') }}</li>
+              <li [class.hint--error]="usernameHintDigitsIsError()">{{ t('auth.login.usernameHintDigits') }}</li>
             }
           </ul>
         }
@@ -48,13 +48,16 @@
           [disabled]="loading()"
           required
         />
-        @if (showPasswordHintLength() || showPasswordHintDigits()) {
+        @if (showPasswordHintLength() || showPasswordHintDigits() || showPasswordHintDanger()) {
           <ul class="field-hints">
             @if (showPasswordHintLength()) {
-              <li>{{ t('auth.login.passwordHintLength') }}</li>
+              <li [class.hint--error]="passwordHintLengthIsError()">{{ t('auth.login.passwordHintLength') }}</li>
             }
             @if (showPasswordHintDigits()) {
-              <li>{{ t('auth.login.passwordHintDigits') }}</li>
+              <li [class.hint--error]="passwordHintDigitsIsError()">{{ t('auth.login.passwordHintDigits') }}</li>
+            }
+            @if (showPasswordHintDanger()) {
+              <li [class.hint--error]="passwordHintDangerIsError()">{{ t('auth.login.passwordHintDanger') }}</li>
             }
           </ul>
         }
@@ -74,10 +77,15 @@
             [disabled]="loading()"
             required
           />
+          @if (showPasswordMismatch()) {
+            <ul class="field-hints field-hints--error">
+              <li>{{ t('auth.login.passwordMismatch') }}</li>
+            </ul>
+          }
         </div>
       }
 
-      <button type="submit" [disabled]="loading()">
+      <button type="submit" [disabled]="loading() || (isSignUp() && !isSignUpFormValid())">
         {{ loading() ? t('auth.login.loading') : (isSignUp() ? t('auth.login.signup_submit') : t('auth.login.submit')) }}
       </button>
     </form>

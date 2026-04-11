@@ -21,6 +21,7 @@
     "usernameHintDigits": "Darf nicht nur aus Zahlen bestehen",
     "passwordHintLength": "Mindestens 6 und maximal 128 Zeichen",
     "passwordHintDigits": "Darf nicht nur aus Zahlen bestehen",
+    "passwordHintDanger": "Enthält unerlaubte Sonderzeichen (< > \" ' ; -- /*)",
     "usernameTooShort": "Benutzername muss mindestens 4 Zeichen lang sein.",
     "usernameOnlyDigits": "Benutzername darf nicht nur aus Zahlen bestehen.",
     "passwordTooShort": "Passwort muss mindestens 6 Zeichen lang sein.",
