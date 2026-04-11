@@ -18,13 +18,17 @@ interface Particle {
   va: number;    // Geschwindigkeit der Eigenbewegung
 }
 
-interface Star {
+interface Firefly {
   x: number;
   y: number;
   size: number;
   color: string;
+  glowColor: string;
   vx: number;
   vy: number;
+  alpha: number;
+  alphaSpeed: number;
+  pulseTimer: number;
 }
 
 @Component({
@@ -43,13 +47,21 @@ export class InteractiveBackgroundComponent implements OnInit, OnChanges, OnDest
 
   private ctx!: CanvasRenderingContext2D;
   private particles: Particle[] = [];
-  private stars: Star[] = [];
+  private fireflies: Firefly[] = [];
   private animationFrameId?: number;
   private mouse = {
     x: -1000,
     y: -1000,
     radius: 50 // Halbiert von 100
   };
+
+  // Tropical evening palette: warm amber, gold, muted teal for tropical feel
+  private readonly FIREFLY_PALETTE = [
+    { color: 'rgba(255, 190, 80', glow: 'rgba(255, 150, 40' },
+    { color: 'rgba(255, 220, 140', glow: 'rgba(255, 200, 100' },
+    { color: 'rgba(100, 200, 160', glow: 'rgba(70, 170, 130' },
+    { color: 'rgba(255, 160, 60', glow: 'rgba(220, 120, 30' },
+  ];
 
   ngOnInit(): void {
     this.checkRoute(this.router.url);
@@ -62,7 +74,7 @@ export class InteractiveBackgroundComponent implements OnInit, OnChanges, OnDest
     const canvas = this.canvasRef.nativeElement;
     this.ctx = canvas.getContext('2d', { willReadFrequently: true })!;
     this.resizeCanvas();
-    this.initStars();
+    this.initFireflies();
     this.initParticles();
     this.animate();
   }
@@ -92,7 +104,7 @@ export class InteractiveBackgroundComponent implements OnInit, OnChanges, OnDest
   @HostListener('window:resize')
   onResize(): void {
     this.resizeCanvas();
-    this.initStars();
+    this.initFireflies();
     this.initParticles();
   }
 
@@ -114,18 +126,23 @@ export class InteractiveBackgroundComponent implements OnInit, OnChanges, OnDest
     canvas.height = window.innerHeight;
   }
 
-  private initStars(): void {
+  private initFireflies(): void {
     const canvas = this.canvasRef.nativeElement;
-    this.stars = [];
-    const starCount = 150 + Math.random() * 50; // 150 bis 200 Sterne
-    for (let i = 0; i < starCount; i++) {
-      this.stars.push({
+    this.fireflies = [];
+    const count = 80 + Math.floor(Math.random() * 40);
+    for (let i = 0; i < count; i++) {
+      const palette = this.FIREFLY_PALETTE[Math.floor(Math.random() * this.FIREFLY_PALETTE.length)];
+      this.fireflies.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        size: Math.random() + 1, // 1-2px
-        color: 'rgba(255, 255, 255, 0.8)',
-        vx: (Math.random() - 0.5) * 0.2, // Sehr geringe Geschwindigkeit
-        vy: (Math.random() - 0.5) * 0.2
+        size: 0.5 + Math.random() * 1.5,
+        color: palette.color,
+        glowColor: palette.glow,
+        vx: (Math.random() - 0.5) * 0.15,
+        vy: (Math.random() - 0.5) * 0.15,
+        alpha: Math.random(),
+        alphaSpeed: 0.003 + Math.random() * 0.007,
+        pulseTimer: Math.random() * Math.PI * 2,
       });
     }
   }
@@ -162,7 +179,7 @@ export class InteractiveBackgroundComponent implements OnInit, OnChanges, OnDest
             y: Math.random() * canvas.height,
             originX: x,
             originY: y,
-            color: 'rgba(100, 200, 255, 0.8)',
+            color: 'rgba(255, 210, 120, 0.85)', // warm golden amber
             size: 2,
             vx: 0,
             vy: 0,
@@ -179,31 +196,55 @@ export class InteractiveBackgroundComponent implements OnInit, OnChanges, OnDest
   private animate(): void {
     const canvas = this.canvasRef.nativeElement;
 
-    // Hintergrundfarbe
-    this.ctx.fillStyle = 'rgba(5, 12, 27, 1)';
+    // Deep mocha/espresso base
+    this.ctx.fillStyle = 'rgba(18, 9, 4, 1)';
     this.ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    this.updateStars();
+    // Subtle warm dusk glow at bottom – distant light source effect
+    const duskGlow = this.ctx.createRadialGradient(
+      canvas.width / 2, canvas.height * 1.1, 0,
+      canvas.width / 2, canvas.height * 1.1, canvas.height * 0.7
+    );
+    duskGlow.addColorStop(0, 'rgba(130, 55, 10, 0.14)');
+    duskGlow.addColorStop(1, 'rgba(0, 0, 0, 0)');
+    this.ctx.fillStyle = duskGlow;
+    this.ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    this.updateFireflies();
     this.updateTextParticles();
 
     this.animationFrameId = requestAnimationFrame(() => this.animate());
   }
 
-  private updateStars(): void {
+  private updateFireflies(): void {
     const canvas = this.canvasRef.nativeElement;
-    this.ctx.fillStyle = 'white';
-    this.stars.forEach(s => {
-      s.x += s.vx;
-      s.y += s.vy;
+    this.fireflies.forEach(f => {
+      f.x += f.vx;
+      f.y += f.vy;
 
-      // Wrap-around Logik
-      if (s.x < 0) s.x = canvas.width;
-      if (s.x > canvas.width) s.x = 0;
-      if (s.y < 0) s.y = canvas.height;
-      if (s.y > canvas.height) s.y = 0;
+      if (f.x < 0) f.x = canvas.width;
+      if (f.x > canvas.width) f.x = 0;
+      if (f.y < 0) f.y = canvas.height;
+      if (f.y > canvas.height) f.y = 0;
 
+      // Organic pulse – sin wave drives alpha
+      f.pulseTimer += f.alphaSpeed;
+      f.alpha = 0.1 + (Math.sin(f.pulseTimer) * 0.5 + 0.5) * 0.7;
+
+      // Soft radial glow behind the core dot
+      const glowRadius = f.size * 5;
+      const glowGrad = this.ctx.createRadialGradient(f.x, f.y, 0, f.x, f.y, glowRadius);
+      glowGrad.addColorStop(0, `${f.glowColor}, ${f.alpha * 0.45})`);
+      glowGrad.addColorStop(1, `${f.glowColor}, 0)`);
+      this.ctx.fillStyle = glowGrad;
       this.ctx.beginPath();
-      this.ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+      this.ctx.arc(f.x, f.y, glowRadius, 0, Math.PI * 2);
+      this.ctx.fill();
+
+      // Core dot
+      this.ctx.fillStyle = `${f.color}, ${f.alpha})`;
+      this.ctx.beginPath();
+      this.ctx.arc(f.x, f.y, f.size, 0, Math.PI * 2);
       this.ctx.fill();
     });
   }
