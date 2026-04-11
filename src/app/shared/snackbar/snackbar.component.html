@@ -1,6 +1,4 @@
-﻿// (file moved from components/snackbar/)
-
-@if (snackbar.notification(); as n) {
+﻿@if (snackbar.notification(); as n) {
   <div class="snackbar" [class.success]="n.type === 'success'" [class.error]="n.type === 'error'">
     {{ n.message }}
   </div>
