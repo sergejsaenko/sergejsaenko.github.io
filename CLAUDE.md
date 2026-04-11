@@ -30,6 +30,7 @@ src/
   app/
     features/
       about/core/     → About-page feature library
+        assets/i18n/  → Feature-specific translations
       home/core/      → Home-page feature library
       layout/core/    → Header / layout components
     shared/
@@ -47,6 +48,13 @@ docs/                 → Build output (deployed to GitHub Pages)
 * **Build**: Angular CLI + esbuild (Vite-based)
 * **Rendering**: SSG – pre-rendered static site
 * **i18n**: @jsverse/transloco (language: de)
+    * ALWAYS use transloco for ALL UI strings
+    * Feature-specific translations in `features/<feature>/core/assets/i18n/de.json`
+    * USAGE:
+        * Component: `provide: TRANSLOCO_SCOPE, useValue: 'featureName'`
+        * Template: `*transloco="let t"` and use full path `t('featureName.key')`
+        * TS: `this.transloco.translate('featureName.key')`
+        * AVOID: `read` property in `*transloco` (deprecated)
 * **Server/Edge**: Hono (lightweight handler)
 * **Testing**: Jasmine + Karma
 * **Linting/Formatting**: ESLint, Prettier, Husky
@@ -83,4 +91,3 @@ docs/                 → Build output (deployed to GitHub Pages)
 * Don't give long explanations when short ones work
 * Don't generate flashy demos that break in production
 * Don't assume I need hand-holding – but do explain what's happening
-
