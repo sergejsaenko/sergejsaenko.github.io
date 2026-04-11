@@ -1,5 +1,8 @@
 ﻿.servers-wrapper {
   padding: 80px 48px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .servers-wrapper h1 {
@@ -13,17 +16,43 @@
 
 .servers-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+@media (max-width: 1024px) {
+  .servers-grid {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 800px;
+  }
+}
+
+@media (max-width: 768px) {
+  .servers-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    max-width: 98vw;
+  }
 }
 
 .server-card {
   border: 1px solid rgba(255, 215, 0, 0.15);
-  border-radius: 8px;
-  padding: 16px;
+  border-radius: 10px;
+  padding: 20px;
   background: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(10px);
   transition: opacity 0.2s, border-color 0.25s ease;
+  min-width: 0;
+  min-height: 220px;
+  font-size: 1.1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  box-sizing: border-box;
 }
 
 .server-card:hover {
@@ -38,7 +67,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 8px;
+  margin: 0 0 16px;
 }
 
 .status-dot {
@@ -61,19 +90,24 @@
 
 .server-name {
   color: rgba(255, 245, 210, 0.92);
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 1.2em;
+  font-weight: 700;
   letter-spacing: 0.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .server-meta {
+  flex: 1 1 auto;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  justify-content: center;
+  height: 100%;
 }
 
 .status-label {
-  font-size: 10px;
+  font-size: 1em;
   letter-spacing: 1.5px;
   text-transform: uppercase;
 }
@@ -89,7 +123,13 @@
 
 .players {
   color: rgba(255, 245, 210, 0.65);
-  font-size: 11px;
+  font-size: 1em;
+  letter-spacing: 1px;
+}
+
+.connection-info {
+  color: rgba(255, 245, 210, 0.4);
+  font-size: 0.95em;
   letter-spacing: 1px;
 }
 
@@ -101,7 +141,7 @@
 
 .hint {
   color: rgba(255, 245, 210, 0.5);
-  font-size: 13px;
+  font-size: 0.95em;
   letter-spacing: 1px;
 }
 
