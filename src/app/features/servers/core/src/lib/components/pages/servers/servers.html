@@ -10,17 +10,26 @@
   }
 
   @if (!loading() && !error()) {
-    <div class="server-grid">
+    <div class="servers-grid">
       @for (server of servers(); track server.name) {
         <div class="server-card" [class.offline]="server.status !== 'running'">
           <div class="server-header">
-            <span class="status-dot" [class.online]="server.status === 'running'"></span>
+            <span class="status-dot"
+              [class.online]="server.ampStatus === 'Running'"
+              [class.idle]="server.ampStatus === 'Idle'">
+            </span>
             <span class="server-name">{{ displayName(server.name) }}</span>
           </div>
           <div class="server-meta">
-            <span class="status-label">{{ server.status }}</span>
-            @if (server.uptime) {
-              <span class="uptime">{{ server.uptime }}</span>
+            <span class="status-label amp-status-{{ server.ampStatus | lowercase }}">
+              {{ server.ampStatus }}
+            </span>
+            <span class="connection-info">IP: {{ parseBrandUrl(server.brandUrl).host }}</span>
+            <span class="connection-info">Port: {{ parseBrandUrl(server.brandUrl).port }}</span>
+            @if (server.players !== null && server.ampStatus !== 'Stopped') {
+              <span class="players">
+                👥 {{ server.players }}{{ server.maxPlayers ? ' / ' + server.maxPlayers : '' }}
+              </span>
             }
           </div>
         </div>
@@ -28,4 +37,3 @@
     </div>
   }
 </div>
-
