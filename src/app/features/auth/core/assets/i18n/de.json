@@ -13,6 +13,20 @@
     "registrationFailed": "Registrierung fehlgeschlagen.",
     "usernameExists": "Dieser Benutzername existiert bereits.",
     "welcome": "Willkommen zurück!",
-    "loginFailed": "Anmeldung fehlgeschlagen."
+    "loginFailed": "Anmeldung fehlgeschlagen.",
+    "passwordConfirm": "Passwort bestätigen",
+    "passwordMismatch": "Passwörter stimmen nicht überein.",
+    "usernameHintLength": "Mindestens 4 und maximal 16 Zeichen",
+    "usernameHintChars": "Nur Buchstaben, Zahlen, _ . -",
+    "usernameHintDigits": "Darf nicht nur aus Zahlen bestehen",
+    "passwordHintLength": "Mindestens 6 und maximal 128 Zeichen",
+    "passwordHintDigits": "Darf nicht nur aus Zahlen bestehen",
+    "passwordHintDanger": "Enthält unerlaubte Sonderzeichen (< > \" ' ; -- /*)",
+    "usernameTooShort": "Benutzername muss mindestens 4 Zeichen lang sein.",
+    "usernameOnlyDigits": "Benutzername darf nicht nur aus Zahlen bestehen.",
+    "passwordTooShort": "Passwort muss mindestens 6 Zeichen lang sein.",
+    "passwordOnlyDigits": "Passwort darf nicht nur aus Zahlen bestehen.",
+    "usernameInvalid": "Benutzername enthält unerlaubte Zeichen.",
+    "passwordInvalid": "Passwort enthält unerlaubte Zeichen."
   }
 }

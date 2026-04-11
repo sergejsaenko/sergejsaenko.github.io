@@ -10,10 +10,27 @@
           type="text"
           [ngModel]="username()"
           (ngModelChange)="username.set($event)"
+          (focus)="usernameFocused.set(true)"
+          (blur)="usernameFocused.set(false)"
           name="username"
           autocomplete="username"
+          [maxlength]="32"
+          [disabled]="loading()"
           required
         />
+        @if (showUsernameHintLength() || showUsernameHintChars() || showUsernameHintDigits()) {
+          <ul class="field-hints">
+            @if (showUsernameHintLength()) {
+              <li [class.hint--error]="usernameHintLengthIsError()">{{ t('auth.login.usernameHintLength') }}</li>
+            }
+            @if (showUsernameHintChars()) {
+              <li [class.hint--error]="usernameHintCharsIsError()">{{ t('auth.login.usernameHintChars') }}</li>
+            }
+            @if (showUsernameHintDigits()) {
+              <li [class.hint--error]="usernameHintDigitsIsError()">{{ t('auth.login.usernameHintDigits') }}</li>
+            }
+          </ul>
+        }
       </div>
 
       <div class="field">
@@ -23,17 +40,55 @@
           type="password"
           [ngModel]="password()"
           (ngModelChange)="password.set($event)"
+          (focus)="passwordFocused.set(true)"
+          (blur)="passwordFocused.set(false)"
           name="password"
           autocomplete="current-password"
+          [maxlength]="128"
+          [disabled]="loading()"
           required
         />
+        @if (showPasswordHintLength() || showPasswordHintDigits() || showPasswordHintDanger()) {
+          <ul class="field-hints">
+            @if (showPasswordHintLength()) {
+              <li [class.hint--error]="passwordHintLengthIsError()">{{ t('auth.login.passwordHintLength') }}</li>
+            }
+            @if (showPasswordHintDigits()) {
+              <li [class.hint--error]="passwordHintDigitsIsError()">{{ t('auth.login.passwordHintDigits') }}</li>
+            }
+            @if (showPasswordHintDanger()) {
+              <li [class.hint--error]="passwordHintDangerIsError()">{{ t('auth.login.passwordHintDanger') }}</li>
+            }
+          </ul>
+        }
       </div>
 
-      <button type="submit" [disabled]="loading()">
+      @if (isSignUp()) {
+        <div class="field">
+          <label for="passwordConfirm">{{ t('auth.login.passwordConfirm') }}</label>
+          <input
+            id="passwordConfirm"
+            type="password"
+            [ngModel]="passwordConfirm()"
+            (ngModelChange)="passwordConfirm.set($event)"
+            name="passwordConfirm"
+            autocomplete="new-password"
+            [maxlength]="128"
+            [disabled]="loading()"
+            required
+          />
+          @if (showPasswordMismatch()) {
+            <ul class="field-hints field-hints--error">
+              <li>{{ t('auth.login.passwordMismatch') }}</li>
+            </ul>
+          }
+        </div>
+      }
+
+      <button type="submit" [disabled]="loading() || (isSignUp() && !isSignUpFormValid())">
         {{ loading() ? t('auth.login.loading') : (isSignUp() ? t('auth.login.signup_submit') : t('auth.login.submit')) }}
       </button>
     </form>
-
 
     <p class="toggle-link" (click)="toggleMode()">
       {{ isSignUp() ? t('auth.login.already_registered') : t('auth.login.no_account') }}

@@ -57,6 +57,24 @@
   border-color: rgba(255, 215, 90, 0.6);
 }
 
+.field-hints {
+  margin: 5px 0 0 0;
+  padding-left: 16px;
+  list-style: disc;
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: rgba(255, 215, 90, 0.55);
+  line-height: 1.6;
+}
+
+.field-hints .hint--error {
+  color: rgba(255, 100, 100, 0.85);
+}
+
+.field-hints--error {
+  color: rgba(255, 100, 100, 0.85);
+}
+
 button[type='submit'] {
   width: 100%;
   padding: 12px;
