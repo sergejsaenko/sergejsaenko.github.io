@@ -29,8 +29,6 @@
 src/
   app/
     features/
-      about/core/     → About-page feature library
-        assets/i18n/  → Feature-specific translations
       home/core/      → Home-page feature library
       layout/core/    → Header / layout components
     shared/
