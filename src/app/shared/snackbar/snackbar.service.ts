@@ -25,5 +25,3 @@ export class SnackbarService {
   }
 }
 
-// (file moved from components/snackbar/)
-

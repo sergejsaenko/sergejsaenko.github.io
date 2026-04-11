@@ -1,4 +1,11 @@
-html, body {
+html {
+  margin: 0;
+  padding: 0;
+  /* Fills iOS safe-area (home indicator) and any gaps the canvas doesn't cover */
+  background-color: #0a0805;
+}
+
+body {
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
