@@ -1,133 +1,165 @@
-
 nav {
   position: fixed;
   display: flex;
-  width: calc(100vw - 32px);
-  justify-content: space-around;
-  align-items: center;
-  height: 64px;
-  min-height: 64px;
-  max-height: 64px;
-  overflow: hidden;
-  top: 16px;
-  left: 16px;
-  right: 16px;
-  filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
+  width: 100%;
+  box-sizing: border-box;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 22px 48px 56px;
+  top: 0;
+  left: 0;
+  right: 0;
+  /* Fades from dark at top → transparent at bottom – merges with canvas */
+  background: linear-gradient(
+    to bottom,
+    rgba(8, 6, 4, 0.82) 0%,
+    rgba(8, 6, 4, 0.35) 55%,
+    rgba(8, 6, 4, 0.00) 100%
+  );
   z-index: 100;
+  pointer-events: none; /* let clicks through the transparent part */
+}
+
+/* Re-enable pointer events only on interactive children */
+nav > * {
+  pointer-events: auto;
 }
 
 .logo {
-  color: rgb(226, 226, 226);
+  color: rgba(255, 245, 210, 0.92);
   text-transform: uppercase;
   letter-spacing: 5px;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: bold;
-  text-decoration: none;
   cursor: pointer;
+  transition: color 0.25s ease;
+}
+
+.logo:hover {
+  color: rgba(255, 215, 90, 1);
 }
 
 .nav-links {
   display: flex;
-  justify-content: space-around;
-  width: 300px;
-  z-index: 101;
+  gap: 40px;
   padding: 0;
+  margin: 0;
   list-style: none;
-  color: rgb(226, 226, 226);
-  text-decoration: none;
+  color: rgba(255, 245, 210, 0.85);
   letter-spacing: 3px;
-  font-weight: bold;
-  font-size: 15px;
-  cursor: pointer;
-  height: 100%;
+  font-weight: 600;
+  font-size: 13px;
   align-items: center;
+}
+
+.nav-links li {
+  cursor: pointer;
+  position: relative;
+  padding-bottom: 3px;
+  transition: color 0.25s ease;
+}
+
+/* Underline slide-in on hover */
+.nav-links li::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: rgba(255, 215, 90, 0.8);
+  transition: width 0.3s ease;
+}
+
+.nav-links li:hover {
+  color: rgba(255, 215, 90, 1);
+}
+
+.nav-links li:hover::after {
+  width: 100%;
 }
 
 .burger {
   display: block;
   cursor: pointer;
+  pointer-events: auto;
 }
 
 .burger div {
-  width: 25px;
-  height: 3px;
-  background-color: rgb(226, 226, 226);
-  margin: 5px;
+  width: 22px;
+  height: 2px;
+  background-color: rgba(255, 245, 210, 0.85);
+  margin: 5px 0;
   transition: all 0.3s ease;
 }
 
 @media screen and (max-width: 768px) {
+  nav {
+    padding: 22px 28px 56px;
+  }
+
   .burger {
     display: block;
   }
 
   .header-container {
     display: flex;
-    position: absolute;
+    position: fixed;
     z-index: 99;
-    right: 16px;
-    top: 100px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    animation: slideInRight 0.4s cubic-bezier(0.77,0,0.18,1) forwards;
+    background: rgba(8, 6, 4, 0.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    animation: fadeIn 0.3s ease forwards;
   }
 
   .header-container .nav-links {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 220px;
-    height: 200px;
-    max-height: 200px;
-    min-height: 200px;
-    /* Prevent nav from growing in height, only width */
+    gap: 32px;
+    width: auto;
+    height: auto;
+    font-size: 1.2em;
+    letter-spacing: 4px;
   }
 
   .header-container .nav-links li {
     opacity: 0;
-    font-size: 1.3em;
-    letter-spacing: 2px;
-    animation: navLinkFade 0.5s ease forwards;
+    animation: navLinkFade 0.4s ease forwards;
   }
 
-  .header-container .nav-links li:nth-child(1) { animation-delay: 0.3s; }
-  .header-container .nav-links li:nth-child(2) { animation-delay: 0.45s; }
-  .header-container .nav-links li:nth-child(3) { animation-delay: 0.6s; }
-  .header-container .nav-links li:nth-child(4) { animation-delay: 0.75s; }
+  .header-container .nav-links li:nth-child(1) { animation-delay: 0.1s; }
+  .header-container .nav-links li:nth-child(2) { animation-delay: 0.2s; }
+  .header-container .nav-links li:nth-child(3) { animation-delay: 0.3s; }
+  .header-container .nav-links li:nth-child(4) { animation-delay: 0.4s; }
 
   .toggle .line1 {
-    transform: rotate(-45deg) translate(-5px, 6px);
+    transform: rotate(-45deg) translate(-4px, 5px);
   }
 
   .toggle .line2 {
     opacity: 0;
+    transform: translateX(-10px);
   }
 
   .toggle .line3 {
-    transform: rotate(45deg) translate(-5px, -6px);
+    transform: rotate(45deg) translate(-4px, -5px);
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
   }
 
   @keyframes navLinkFade {
-    from {
-      opacity: 0;
-      transform: translateX(50px);
-    }
-
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-
-  @keyframes slideInRight {
-    from {
-      transform: translateX(100vw);
-      opacity: 0.7;
-    }
-    to {
-      transform: translateX(0);
-      opacity: 1;
-    }
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
   }
 }

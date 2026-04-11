@@ -1,4 +1,4 @@
-<nav class="glass_effect">
+<nav>
   <div class="logo">
     <span routerLink="/">Scaffiz</span>
   </div>
@@ -18,7 +18,7 @@
 
 <!-- Mobile menu overlay -->
 @if (menuOpen) {
-  <div class="header-container glass_effect" (click)="closeMenuOnOverlay($event)">
+  <div class="header-container" (click)="closeMenuOnOverlay($event)">
     <ul class="nav-links">
       <li routerLink="/about">About</li>
     </ul>
