@@ -14,4 +14,12 @@ export const routes: Routes = [
             return import('./features/about/core/src/index').then(m => m.About);
         },
     },
+    {
+        path: 'login',
+        loadComponent() {
+            return import('./features/auth/core/src/index').then(m => m.Login);
+        },
+    },
 ];
+
+

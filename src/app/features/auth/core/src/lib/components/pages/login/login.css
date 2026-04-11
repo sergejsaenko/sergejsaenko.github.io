@@ -1,0 +1,106 @@
+﻿.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh;
+}
+
+.login-card {
+  background: rgba(20, 18, 14, 0.85);
+  border: 1px solid rgba(255, 215, 90, 0.15);
+  border-radius: 12px;
+  padding: 40px 36px;
+  width: 100%;
+  max-width: 380px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.login-card h2 {
+  color: rgba(255, 245, 210, 0.92);
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0 0 28px;
+  text-align: center;
+}
+
+.field {
+  margin-bottom: 18px;
+}
+
+.field label {
+  display: block;
+  color: rgba(255, 245, 210, 0.65);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.field input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 215, 90, 0.2);
+  border-radius: 6px;
+  color: rgba(255, 245, 210, 0.9);
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.25s ease;
+}
+
+.field input:focus {
+  border-color: rgba(255, 215, 90, 0.6);
+}
+
+button[type='submit'] {
+  width: 100%;
+  padding: 12px;
+  margin-top: 8px;
+  background: rgba(255, 215, 90, 0.15);
+  border: 1px solid rgba(255, 215, 90, 0.35);
+  border-radius: 6px;
+  color: rgba(255, 245, 210, 0.92);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+button[type='submit']:hover:not(:disabled) {
+  background: rgba(255, 215, 90, 0.28);
+  border-color: rgba(255, 215, 90, 0.6);
+}
+
+button[type='submit']:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.message {
+  text-align: center;
+  color: rgba(255, 215, 90, 0.85);
+  font-size: 12px;
+  margin-top: 16px;
+  letter-spacing: 1px;
+}
+
+.toggle-link {
+  text-align: center;
+  color: rgba(255, 245, 210, 0.5);
+  font-size: 11px;
+  margin-top: 20px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: color 0.25s ease;
+}
+
+.toggle-link:hover {
+  color: rgba(255, 215, 90, 0.9);
+}
+
