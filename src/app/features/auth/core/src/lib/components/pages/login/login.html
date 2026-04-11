@@ -1,0 +1,43 @@
+﻿<div class="login-wrapper">
+  <div class="login-card">
+    <h2>{{ isSignUp() ? 'Registrieren' : 'Anmelden' }}</h2>
+
+    <form (ngSubmit)="submit()">
+      <div class="field">
+        <label for="username">Benutzername</label>
+        <input
+          id="username"
+          type="text"
+          [ngModel]="username()"
+          (ngModelChange)="username.set($event)"
+          name="username"
+          autocomplete="username"
+          required
+        />
+      </div>
+
+      <div class="field">
+        <label for="password">Passwort</label>
+        <input
+          id="password"
+          type="password"
+          [ngModel]="password()"
+          (ngModelChange)="password.set($event)"
+          name="password"
+          autocomplete="current-password"
+          required
+        />
+      </div>
+
+      <button type="submit" [disabled]="loading()">
+        {{ loading() ? '...' : isSignUp() ? 'Registrieren' : 'Anmelden' }}
+      </button>
+    </form>
+
+
+    <p class="toggle-link" (click)="toggleMode()">
+      {{ isSignUp() ? 'Bereits registriert? Anmelden' : 'Noch kein Konto? Registrieren' }}
+    </p>
+  </div>
+</div>
+

@@ -1,15 +1,13 @@
-import { OnInit, OnDestroy } from '@angular/core';
-
-import { Component } from '@angular/core';
+import { OnInit, OnDestroy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-
+import { AuthService } from '../../../../../../../core/services/auth.service';
 
 @Component({
   selector: 'app-header',
   standalone: true,
   imports: [RouterLink],
   templateUrl: './header.html',
-  styleUrls: ['./header.css']
+  styleUrls: ['./header.css'],
 })
 export class Header implements OnInit, OnDestroy {
   menuOpen = false;
@@ -21,6 +19,8 @@ export class Header implements OnInit, OnDestroy {
       document.body.style.overflowX = '';
     }
   };
+
+  constructor(protected readonly auth: AuthService) {}
 
   ngOnInit() {
     window.addEventListener('resize', this.resizeListener);
@@ -41,5 +41,9 @@ export class Header implements OnInit, OnDestroy {
       this.menuOpen = false;
       document.body.style.overflowX = '';
     }
+  }
+
+  logout() {
+    this.auth.logout();
   }
 }
