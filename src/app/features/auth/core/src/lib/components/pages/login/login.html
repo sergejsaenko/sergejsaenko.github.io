@@ -14,6 +14,8 @@
           (blur)="usernameFocused.set(false)"
           name="username"
           autocomplete="username"
+          [maxlength]="32"
+          [disabled]="loading()"
           required
         />
         @if (showUsernameHintLength() || showUsernameHintChars() || showUsernameHintDigits()) {
@@ -42,6 +44,8 @@
           (blur)="passwordFocused.set(false)"
           name="password"
           autocomplete="current-password"
+          [maxlength]="128"
+          [disabled]="loading()"
           required
         />
         @if (showPasswordHintLength() || showPasswordHintDigits()) {
@@ -55,6 +59,23 @@
           </ul>
         }
       </div>
+
+      @if (isSignUp()) {
+        <div class="field">
+          <label for="passwordConfirm">{{ t('auth.login.passwordConfirm') }}</label>
+          <input
+            id="passwordConfirm"
+            type="password"
+            [ngModel]="passwordConfirm()"
+            (ngModelChange)="passwordConfirm.set($event)"
+            name="passwordConfirm"
+            autocomplete="new-password"
+            [maxlength]="128"
+            [disabled]="loading()"
+            required
+          />
+        </div>
+      }
 
       <button type="submit" [disabled]="loading()">
         {{ loading() ? t('auth.login.loading') : (isSignUp() ? t('auth.login.signup_submit') : t('auth.login.submit')) }}
