@@ -13,6 +13,10 @@
     "registrationFailed": "Registrierung fehlgeschlagen.",
     "usernameExists": "Dieser Benutzername existiert bereits.",
     "welcome": "Willkommen zurück!",
-    "loginFailed": "Anmeldung fehlgeschlagen."
+    "loginFailed": "Anmeldung fehlgeschlagen.",
+    "usernameHint": "Mindestens 4 Zeichen",
+    "passwordHint": "Mindestens 6 Zeichen",
+    "usernameTooShort": "Benutzername muss mindestens 4 Zeichen lang sein.",
+    "passwordTooShort": "Passwort muss mindestens 6 Zeichen lang sein."
   }
 }

@@ -10,10 +10,15 @@
           type="text"
           [ngModel]="username()"
           (ngModelChange)="username.set($event)"
+          (focus)="usernameFocused.set(true)"
+          (blur)="usernameFocused.set(false)"
           name="username"
           autocomplete="username"
           required
         />
+        @if (usernameFocused()) {
+          <span class="field-hint">{{ t('auth.login.usernameHint') }}</span>
+        }
       </div>
 
       <div class="field">
@@ -23,17 +28,21 @@
           type="password"
           [ngModel]="password()"
           (ngModelChange)="password.set($event)"
+          (focus)="passwordFocused.set(true)"
+          (blur)="passwordFocused.set(false)"
           name="password"
           autocomplete="current-password"
           required
         />
+        @if (passwordFocused()) {
+          <span class="field-hint">{{ t('auth.login.passwordHint') }}</span>
+        }
       </div>
 
       <button type="submit" [disabled]="loading()">
         {{ loading() ? t('auth.login.loading') : (isSignUp() ? t('auth.login.signup_submit') : t('auth.login.submit')) }}
       </button>
     </form>
-
 
     <p class="toggle-link" (click)="toggleMode()">
       {{ isSignUp() ? t('auth.login.already_registered') : t('auth.login.no_account') }}

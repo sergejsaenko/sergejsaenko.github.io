@@ -57,6 +57,14 @@
   border-color: rgba(255, 215, 90, 0.6);
 }
 
+.field-hint {
+  display: block;
+  margin-top: 5px;
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: rgba(255, 215, 90, 0.55);
+}
+
 button[type='submit'] {
   width: 100%;
   padding: 12px;

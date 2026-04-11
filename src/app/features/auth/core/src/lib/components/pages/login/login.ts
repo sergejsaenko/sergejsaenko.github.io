@@ -23,6 +23,8 @@ export class Login {
   protected readonly password = signal('');
   protected readonly isSignUp = signal(false);
   protected readonly loading = signal(false);
+  protected readonly usernameFocused = signal(false);
+  protected readonly passwordFocused = signal(false);
 
   constructor(
     private readonly auth: AuthService,
@@ -35,6 +37,17 @@ export class Login {
     this.loading.set(true);
 
     if (this.isSignUp()) {
+      if (this.username().length < 4) {
+        this.snackbar.error(this.transloco.translate('auth.login.usernameTooShort'));
+        this.loading.set(false);
+        return;
+      }
+      if (this.password().length < 6) {
+        this.snackbar.error(this.transloco.translate('auth.login.passwordTooShort'));
+        this.loading.set(false);
+        return;
+      }
+
       this.auth.signUp(this.username(), this.password()).subscribe({
         next: () => {
           this.snackbar.success(this.transloco.translate('auth.login.registrationSuccess'));
