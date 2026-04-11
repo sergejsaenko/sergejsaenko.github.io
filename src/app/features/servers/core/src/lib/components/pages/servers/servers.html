@@ -1,0 +1,31 @@
+﻿<div class="servers-wrapper">
+  <h1>Game Server</h1>
+
+  @if (loading()) {
+    <p class="hint">Lade Server...</p>
+  }
+
+  @if (error()) {
+    <p class="hint error">{{ error() }}</p>
+  }
+
+  @if (!loading() && !error()) {
+    <div class="server-grid">
+      @for (server of servers(); track server.name) {
+        <div class="server-card" [class.offline]="server.status !== 'running'">
+          <div class="server-header">
+            <span class="status-dot" [class.online]="server.status === 'running'"></span>
+            <span class="server-name">{{ displayName(server.name) }}</span>
+          </div>
+          <div class="server-meta">
+            <span class="status-label">{{ server.status }}</span>
+            @if (server.uptime) {
+              <span class="uptime">{{ server.uptime }}</span>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>
+

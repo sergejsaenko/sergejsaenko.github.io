@@ -14,4 +14,10 @@ export const routes: Routes = [
             return import('./features/auth/core/src/index').then(m => m.Login);
         },
     },
+    {
+        path: 'servers',
+        loadComponent() {
+            return import('./features/servers/core/src/index').then(m => m.Servers);
+        },
+    },
 ];
