@@ -4,6 +4,7 @@
   </div>
   @if (!isMobile) {
     <ul class="nav-links">
+      <li routerLink="/servers">Servers</li>
       @if (auth.isGuest()) {
         <li routerLink="/login">Login</li>
       } @else {
@@ -24,6 +25,7 @@
 @if (menuOpen) {
   <div class="header-container" (click)="closeMenuOnOverlay($event)">
     <ul class="nav-links">
+      <li routerLink="/servers" (click)="closeMenu()">Servers</li>
       @if (auth.isGuest()) {
         <li routerLink="/login" (click)="closeMenu()">Login</li>
       } @else {
