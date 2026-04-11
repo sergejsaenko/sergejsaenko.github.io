@@ -9,17 +9,9 @@ export const routes: Routes = [
         },
     },
     {
-        path: 'about',
-        loadComponent() {
-            return import('./features/about/core/src/index').then(m => m.About);
-        },
-    },
-    {
         path: 'login',
         loadComponent() {
             return import('./features/auth/core/src/index').then(m => m.Login);
         },
     },
 ];
-
-

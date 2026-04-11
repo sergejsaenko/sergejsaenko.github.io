@@ -1,6 +1,0 @@
-{
-  "name": "@my-app/about-core",
-  "version": "0.0.1",
-  "dependencies": {},
-  "main": "src/index.ts"
-}

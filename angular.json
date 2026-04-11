@@ -37,11 +37,6 @@
               },
               {
                 "glob": "**/*",
-                "input": "src/app/features/about/core/assets/i18n",
-                "output": "i18n/about"
-              },
-              {
-                "glob": "**/*",
                 "input": "src/app/features/auth/core/assets/i18n",
                 "output": "i18n/auth"
               }
