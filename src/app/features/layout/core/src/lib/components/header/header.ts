@@ -38,12 +38,17 @@ export class Header implements OnInit, OnDestroy {
 
   closeMenuOnOverlay(event: Event) {
     if ((event.target as HTMLElement).classList.contains('header-container')) {
-      this.menuOpen = false;
-      document.body.style.overflowX = '';
+      this.closeMenu();
     }
+  }
+
+  closeMenu() {
+    this.menuOpen = false;
+    document.body.style.overflowX = '';
   }
 
   logout() {
     this.auth.logout();
+    this.closeMenu();
   }
 }

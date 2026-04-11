@@ -69,8 +69,12 @@ export class InteractiveBackgroundComponent implements OnInit, OnDestroy {
 
   private resizeCanvas(): void {
     const canvas = this.canvasRef.nativeElement;
-    canvas.width  = window.innerWidth;
-    canvas.height = window.innerHeight;
+    // Use visualViewport if available for mobile (iOS) to handle the bar correctly
+    const width = window.visualViewport ? window.visualViewport.width : window.innerWidth;
+    const height = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+
+    canvas.width  = width;
+    canvas.height = height;
   }
 
   // ——— Offscreen renders ————————————————————————————————
