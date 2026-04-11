@@ -57,12 +57,14 @@
   border-color: rgba(255, 215, 90, 0.6);
 }
 
-.field-hint {
-  display: block;
-  margin-top: 5px;
+.field-hints {
+  margin: 5px 0 0 0;
+  padding-left: 16px;
+  list-style: disc;
   font-size: 10px;
   letter-spacing: 1px;
   color: rgba(255, 215, 90, 0.55);
+  line-height: 1.6;
 }
 
 button[type='submit'] {

@@ -17,7 +17,10 @@
           required
         />
         @if (usernameFocused()) {
-          <span class="field-hint">{{ t('auth.login.usernameHint') }}</span>
+          <ul class="field-hints">
+            <li>{{ t('auth.login.usernameHintLength') }}</li>
+            <li>{{ t('auth.login.usernameHintChars') }}</li>
+          </ul>
         }
       </div>
 
@@ -35,7 +38,10 @@
           required
         />
         @if (passwordFocused()) {
-          <span class="field-hint">{{ t('auth.login.passwordHint') }}</span>
+          <ul class="field-hints">
+            <li>{{ t('auth.login.passwordHintLength') }}</li>
+            <li>{{ t('auth.login.passwordHintDigits') }}</li>
+          </ul>
         }
       </div>
 

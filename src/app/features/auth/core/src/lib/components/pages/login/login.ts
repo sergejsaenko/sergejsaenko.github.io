@@ -26,6 +26,11 @@ export class Login {
   protected readonly usernameFocused = signal(false);
   protected readonly passwordFocused = signal(false);
 
+  // Only letters, digits, underscore, dot, dash – no HTML/SQL special chars
+  private readonly USERNAME_PATTERN = /^[a-zA-Z0-9_.\\-]+$/;
+  // Reject dangerous sequences: <, >, ", ', ;, --, /* */ for SQL/HTML/JS injection
+  private readonly DANGEROUS_PATTERN = /[<>"';]|--|\/\*/;
+
   constructor(
     private readonly auth: AuthService,
     private readonly snackbar: SnackbarService,
@@ -33,17 +38,26 @@ export class Login {
     private readonly transloco: TranslocoService,
   ) {}
 
+  private validateForSignUp(): string | null {
+    const u = this.username();
+    const p = this.password();
+
+    if (u.length < 4) return 'auth.login.usernameTooShort';
+    if (!this.USERNAME_PATTERN.test(u)) return 'auth.login.usernameInvalid';
+    if (p.length < 6) return 'auth.login.passwordTooShort';
+    if (/^\d+$/.test(p)) return 'auth.login.passwordOnlyDigits';
+    if (this.DANGEROUS_PATTERN.test(p)) return 'auth.login.passwordInvalid';
+
+    return null;
+  }
+
   submit(): void {
     this.loading.set(true);
 
     if (this.isSignUp()) {
-      if (this.username().length < 4) {
-        this.snackbar.error(this.transloco.translate('auth.login.usernameTooShort'));
-        this.loading.set(false);
-        return;
-      }
-      if (this.password().length < 6) {
-        this.snackbar.error(this.transloco.translate('auth.login.passwordTooShort'));
+      const validationError = this.validateForSignUp();
+      if (validationError) {
+        this.snackbar.error(this.transloco.translate(validationError));
         this.loading.set(false);
         return;
       }
