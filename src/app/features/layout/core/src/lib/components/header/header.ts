@@ -1,6 +1,6 @@
 import { OnInit, OnDestroy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { AuthService } from '../../../../../../../core/services/auth.service';
+import { AuthService } from '../../../../../../../features/auth/states/authFacade';
 
 @Component({
   selector: 'app-header',
