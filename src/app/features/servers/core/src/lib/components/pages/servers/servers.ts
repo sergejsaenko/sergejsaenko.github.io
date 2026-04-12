@@ -1,6 +1,6 @@
 ﻿import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GameServer, GameServerService } from '../../../../../../../../core/services/game-server.service';
+import { GameServer, GameServerService } from '../../../../../../states/serversFacade';
 
 @Component({
   selector: 'app-servers',
