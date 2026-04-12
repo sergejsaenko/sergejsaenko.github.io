@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 export interface GameServer {
-  name: string;
+  friendlyName: string;
   status: 'running' | 'stopped';
   ampStatus: string;          // never null: 'Stopped' | 'Idle' | 'Running' | …
   image: string;              // AMP module: 'Minecraft' | 'GenericModule' | …
@@ -18,7 +18,7 @@ export interface GameServer {
 const GAME_SERVERS_QUERY = gql`
   query {
     gameServers {
-      name
+      friendlyName
       status
       ampStatus
       image
