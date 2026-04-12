@@ -28,15 +28,35 @@
 ```
 src/
   app/
+    core/
+      graphql.provider.ts   → Apollo/GraphQL setup
+      guards/               → Route guards (e.g. authGuard)
     features/
-      home/core/      → Home-page feature library
-      layout/core/    → Header / layout components
+      <feature>/
+        core/               → UI components, templates, styles, i18n assets
+          assets/i18n/      → Feature-scoped translation files (de.json)
+          src/lib/components/pages/<page>/
+        states/             → All GraphQL-related code for this feature
+          <feature>Models.ts      → TypeScript interfaces / types
+          <feature>Queries.ts     → gql query documents
+          <feature>Mutations.ts   → gql mutation documents
+          <feature>Effects.ts     → Side effects (e.g. localStorage, routing)
+          <feature>Facade.ts      → Injectable service – orchestrates Apollo + effects
+      home/core/            → Home-page feature
+      layout/core/          → Header / layout components
+      auth/
+        core/               → Login UI
+        states/             → authMutations, authEffects, authFacade
+      servers/
+        core/               → Servers UI
+        states/             → serversModels, serversQueries, serversMutations, serversFacade
     shared/
-      assets/         → Icons, i18n translations
-      components/     → Shared standalone components
-  assets/i18n/        → Global translation files (de.json)
-docs/                 → Build output (deployed to GitHub Pages)
-  browser/            → Pre-rendered static HTML + JS bundles
+      assets/               → Icons, global i18n translations
+      interactive-background/ → Animated CSS background component
+      snackbar/             → Snackbar component + service
+  assets/i18n/              → Global translation files (de.json)
+docs/                       → Build output (deployed to GitHub Pages)
+  browser/                  → Pre-rendered static HTML + JS bundles
 ```
 
 ## Project Tech Stack

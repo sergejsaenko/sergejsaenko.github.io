@@ -1,7 +1,7 @@
 ﻿import { Component, computed, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../../../../../../../core/services/auth.service';
+import { AuthService } from '../../../../../../states/authFacade';
 import { SnackbarService } from '../../../../../../../../shared/snackbar/snackbar.service';
 import { TRANSLOCO_SCOPE, TranslocoDirective, TranslocoService } from '@jsverse/transloco';
 

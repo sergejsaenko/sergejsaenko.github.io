@@ -1,28 +1,12 @@
 ﻿import { Injectable, signal, computed } from '@angular/core';
-import { Apollo, gql } from 'apollo-angular';
+import { Apollo } from 'apollo-angular';
 import { map, tap } from 'rxjs';
-
-const SIGN_UP = gql`
-  mutation SignUp($username: String!, $password: String!) {
-    signUp(username: $username, password: $password) {
-      id
-      username
-    }
-  }
-`;
-
-const SIGN_IN = gql`
-  mutation SignIn($username: String!, $password: String!) {
-    signIn(username: $username, password: $password) {
-      token
-    }
-  }
-`;
+import { SIGN_UP, SIGN_IN } from './authMutations';
+import { persistToken, clearToken, getStoredToken, isTokenPresent } from './authEffects';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private readonly tokenKey = 'auth_token';
-  private readonly _isLoggedIn = signal(!!localStorage.getItem('auth_token'));
+  private readonly _isLoggedIn = signal(isTokenPresent());
 
   readonly isLoggedIn = this._isLoggedIn.asReadonly();
   readonly isGuest = computed(() => !this._isLoggedIn());
@@ -41,19 +25,19 @@ export class AuthService {
       .pipe(
         map((result: any) => result.data.signIn.token),
         tap((token: string) => {
-          localStorage.setItem(this.tokenKey, token);
+          persistToken(token);
           this._isLoggedIn.set(true);
         }),
       );
   }
 
   logout(): void {
-    localStorage.removeItem(this.tokenKey);
+    clearToken();
     this._isLoggedIn.set(false);
   }
 
   getToken(): string | null {
-    return localStorage.getItem(this.tokenKey);
+    return getStoredToken();
   }
 }
 
