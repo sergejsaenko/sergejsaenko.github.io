@@ -16,8 +16,7 @@ export class Servers implements OnInit {
 
   constructor(private readonly gameServerService: GameServerService) {}
 
-  ngOnInit(): void {
-    this.gameServerService.getServers().subscribe({
+  ngOnInit(): void {    this.gameServerService.getServers().subscribe({
       next: (data) => {
         this.servers.set(data ?? []);
         this.loading.set(false);
@@ -29,10 +28,6 @@ export class Servers implements OnInit {
     });
   }
 
-  // "MinecraftDaniel01" → "Minecraft Daniel 01"
-  protected displayName(raw: string): string {
-    return raw.replace(/([a-z])([A-Z])/g, '$1 $2').replace(/(\D)(\d)/g, '$1 $2');
-  }
 
   // "subdomain.domain.de:25565" → { host: "subdomain.domain.de", port: "25565" }
   // null/empty → { host: "-", port: "-" }
