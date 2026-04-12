@@ -1,6 +1,17 @@
+:host {
+  display: block;
+}
 
-/* Abstand zur Navbar oben */
-body, :host {
-	display: block;
-	padding-top: 9vh;
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100dvh;
+  padding-top: 56px;
+  box-sizing: border-box;
+}
+
+.blackhole-canvas {
+  display: block;
+  max-width: 100%;
 }
