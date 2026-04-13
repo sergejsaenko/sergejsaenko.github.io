@@ -1,6 +1,16 @@
 ﻿<div class="servers-wrapper">
   <h1>Game Server</h1>
 
+  <div class="search-bar">
+    <input
+      type="search"
+      placeholder="Suche nach Server"
+      [value]="search()"
+      (input)="search.set($any($event.target).value)"
+      aria-label="Suche Server"
+    />
+  </div>
+
   @if (loading()) {
     <p class="hint">Lade Server...</p>
   }
@@ -11,7 +21,7 @@
 
   @if (!loading() && !error()) {
     <div class="servers-grid">
-      @for (server of servers(); track server.friendlyName) {
+      @for (server of filteredServers(); track server.friendlyName) {
         <div class="server-card" [class.offline]="server.status !== 'running'">
           <div class="server-header">
             <span class="status-dot"
