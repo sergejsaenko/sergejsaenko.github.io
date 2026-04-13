@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, signal } from '@angular/core';
+﻿import { Component, OnInit, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GameServer, GameServerService } from '../../../../../../states/serversFacade';
 
@@ -11,6 +11,22 @@ import { GameServer, GameServerService } from '../../../../../../states/serversF
 })
 export class Servers implements OnInit {
   protected readonly servers = signal<GameServer[]>([]);
+  protected readonly search = signal('');
+  // derived list: filter by search term and sort running servers first
+  protected readonly filteredServers = computed(() => {
+    const term = this.search().trim().toLowerCase();
+    const list = this.servers();
+    const filtered = term
+      ? list.filter(s => (s.friendlyName ?? '').toLowerCase().includes(term))
+      : list.slice();
+    // sort: running first, keep relative order otherwise
+    filtered.sort((a, b) => {
+      const aRunning = (a.status ?? '').toLowerCase() === 'running' ? 0 : 1;
+      const bRunning = (b.status ?? '').toLowerCase() === 'running' ? 0 : 1;
+      return aRunning - bRunning;
+    });
+    return filtered;
+  });
   protected readonly loading = signal(true);
   protected readonly error = signal<string | null>(null);
 

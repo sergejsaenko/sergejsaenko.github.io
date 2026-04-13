@@ -1,0 +1,24 @@
+﻿<div class="services-wrapper" *transloco="let t">
+  <h1>{{ t('services.page.title') }}</h1>
+
+  @if (loading()) {
+    <p class="hint">{{ t('services.page.loading') }}</p>
+  }
+
+  @if (error()) {
+    <p class="hint hint--error">{{ t('services.page.error') }}</p>
+  }
+
+  @if (!loading() && !error()) {
+    @if (services().length === 0) {
+      <p class="hint">{{ t('services.page.empty') }}</p>
+    } @else {
+      <div class="services-grid">
+        @for (service of services(); track service.name) {
+          <app-service-card [service]="service" />
+        }
+      </div>
+    }
+  }
+</div>
+

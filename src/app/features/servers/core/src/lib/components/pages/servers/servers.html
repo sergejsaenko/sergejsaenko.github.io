@@ -1,0 +1,49 @@
+﻿<div class="servers-wrapper">
+  <h1>Game Server</h1>
+
+  <div class="search-bar">
+    <input
+      type="search"
+      placeholder="Suche nach Server"
+      [value]="search()"
+      (input)="search.set($any($event.target).value)"
+      aria-label="Suche Server"
+    />
+  </div>
+
+  @if (loading()) {
+    <p class="hint">Lade Server...</p>
+  }
+
+  @if (error()) {
+    <p class="hint error">{{ error() }}</p>
+  }
+
+  @if (!loading() && !error()) {
+    <div class="servers-grid">
+      @for (server of filteredServers(); track server.friendlyName) {
+        <div class="server-card" [class.offline]="server.status !== 'running'">
+          <div class="server-header">
+            <span class="status-dot"
+              [class.online]="server.ampStatus === 'Running'"
+              [class.idle]="server.ampStatus === 'Idle'">
+            </span>
+            <span class="server-name">{{ server.friendlyName }}</span>
+          </div>
+          <div class="server-meta">
+            <span class="status-label amp-status-{{ server.ampStatus | lowercase }}">
+              {{ server.ampStatus }}
+            </span>
+            <span class="connection-info">IP: {{ parseBrandUrl(server.brandUrl).host }}</span>
+            <span class="connection-info">Port: {{ parseBrandUrl(server.brandUrl).port }}</span>
+            @if (server.players !== null && server.ampStatus !== 'Stopped') {
+              <span class="players">
+                👥 {{ server.players }}{{ server.maxPlayers ? ' / ' + server.maxPlayers : '' }}
+              </span>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>

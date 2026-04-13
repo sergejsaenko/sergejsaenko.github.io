@@ -1,0 +1,15 @@
+﻿{
+  "page": {
+    "title": "Services",
+    "loading": "Lade Services...",
+    "error": "Services konnten nicht geladen werden.",
+    "empty": "Keine Services gefunden."
+  },
+  "card": {
+    "online": "Online",
+    "offline": "Offline",
+    "openLink": "Service öffnen"
+  }
+}
+
+
