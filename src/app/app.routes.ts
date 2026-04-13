@@ -20,4 +20,10 @@ export const routes: Routes = [
             return import('./features/servers/core/src/index').then(m => m.Servers);
         },
     },
+    {
+        path: 'services',
+        loadComponent() {
+            return import('./features/services/core/src/index').then(m => m.ServicesPage);
+        },
+    },
 ];

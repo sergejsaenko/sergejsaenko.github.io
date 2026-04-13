@@ -1,0 +1,96 @@
+﻿.service-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 215, 0, 0.15);
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, opacity 0.2s ease;
+  min-height: 110px;
+}
+
+.service-card:hover {
+  border-color: rgba(255, 215, 90, 0.4);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+}
+
+.service-card.offline {
+  border-color: rgba(255, 80, 80, 0.2);
+  opacity: 0.6;
+}
+
+.service-card.offline:hover {
+  border-color: rgba(255, 80, 80, 0.35);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: rgba(255, 245, 210, 0.2);
+}
+
+.dot-online {
+  background: #4caf50;
+  box-shadow: 0 0 6px rgba(76, 175, 80, 0.5);
+}
+
+.dot-offline {
+  background: rgba(255, 80, 80, 0.7);
+  box-shadow: 0 0 6px rgba(255, 80, 80, 0.3);
+}
+
+.service-name {
+  color: rgba(255, 245, 210, 0.92);
+  font-size: 1.1em;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.open-icon {
+  color: rgba(255, 245, 210, 0.3);
+  font-size: 0.9em;
+  flex-shrink: 0;
+  transition: color 0.2s ease;
+}
+
+.service-card:hover .open-icon {
+  color: rgba(255, 215, 90, 0.7);
+}
+
+.card-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.status-label {
+  font-size: 0.75em;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.status-online { color: #4caf50; }
+.status-offline { color: rgba(255, 80, 80, 0.7); }
+
+.response-ms {
+  color: rgba(255, 215, 90, 0.65);
+  font-size: 0.75em;
+  letter-spacing: 1px;
+}
+
