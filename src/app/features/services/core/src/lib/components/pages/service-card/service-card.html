@@ -1,0 +1,36 @@
+﻿<ng-container *transloco="let t">
+  <a
+    [href]="service.url"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="service-card"
+    [class.online]="service.status === 'online'"
+    [class.offline]="service.status === 'offline'"
+    [attr.aria-label]="t('services.card.openLink') + ': ' + service.displayName"
+  >
+    <div class="card-header">
+      <span
+        class="status-dot"
+        [class.dot-online]="service.status === 'online'"
+        [class.dot-offline]="service.status === 'offline'"
+      ></span>
+      <span class="service-name">{{ service.displayName }}</span>
+      <span class="open-icon">↗</span>
+    </div>
+
+    <div class="card-meta">
+      <span
+        class="status-label"
+        [class.status-online]="service.status === 'online'"
+        [class.status-offline]="service.status === 'offline'"
+      >
+        {{ service.status === 'online' ? t('services.card.online') : t('services.card.offline') }}
+      </span>
+
+      @if (service.status === 'online' && service.responseMs !== null) {
+        <span class="response-ms">{{ service.responseMs }} ms</span>
+      }
+    </div>
+  </a>
+</ng-container>
+

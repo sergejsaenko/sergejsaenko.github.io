@@ -5,6 +5,9 @@
   @if (!isMobile) {
     <ul class="nav-links">
       <li routerLink="/servers">Servers</li>
+      @if (auth.isAdmin()) {
+        <li routerLink="/services">Services</li>
+      }
       @if (auth.isGuest()) {
         <li routerLink="/login">Login</li>
       } @else {
@@ -26,6 +29,9 @@
   <div class="header-container" (click)="closeMenuOnOverlay($event)">
     <ul class="nav-links">
       <li routerLink="/servers" (click)="closeMenu()">Servers</li>
+      @if (auth.isAdmin()) {
+        <li routerLink="/services" (click)="closeMenu()">Services</li>
+      }
       @if (auth.isGuest()) {
         <li routerLink="/login" (click)="closeMenu()">Login</li>
       } @else {
