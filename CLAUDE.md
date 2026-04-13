@@ -30,12 +30,13 @@ src/
   app/
     core/
       graphql.provider.ts   → Apollo/GraphQL setup
-      guards/               → Route guards (e.g. authGuard)
     features/
       <feature>/
         core/               → UI components, templates, styles, i18n assets
           assets/i18n/      → Feature-scoped translation files (de.json)
-          src/lib/components/pages/<page>/
+          src/lib/components/pages/
+            <page>/         → page component (.ts / .html / .css)
+            <sub-component>/→ child components (.ts / .html / .css) – inside pages/
         states/             → All GraphQL-related code for this feature
           <feature>Models.ts      → TypeScript interfaces / types
           <feature>Queries.ts     → gql query documents
@@ -50,6 +51,13 @@ src/
       servers/
         core/               → Servers UI
         states/             → serversModels, serversQueries, serversMutations, serversFacade
+      services/
+        core/               → Services status UI (admin only)
+          assets/i18n/de.json
+          src/lib/components/pages/
+            services-page/  → page component
+            service-card/   → card sub-component
+        states/             → servicesModels, servicesQueries, servicesFacade
     shared/
       assets/               → Icons, global i18n translations
       interactive-background/ → Animated CSS background component
@@ -68,8 +76,15 @@ docs/                       → Build output (deployed to GitHub Pages)
 * **i18n**: @jsverse/transloco (language: de)
     * ALWAYS use transloco for ALL UI strings
     * Feature-specific translations in `features/<feature>/core/assets/i18n/de.json`
+    * ALWAYS add an asset mapping in `angular.json` for each feature scope:
+        ```json
+        { "glob": "**/*", "input": "src/app/features/<feature>/core/assets/i18n", "output": "i18n/<feature>" }
+        ```
+    * de.json structure: do NOT repeat the scope name as a top-level key — transloco auto-prefixes it
+        * ✅ `{ "page": { "title": "..." } }` with scope `'myFeature'` → key = `myFeature.page.title`
+        * ❌ `{ "myFeature": { "page": { "title": "..." } } }` → breaks (double prefix)
     * USAGE:
-        * Component: `provide: TRANSLOCO_SCOPE, useValue: 'featureName'`
+        * Component: `providers: [{ provide: TRANSLOCO_SCOPE, useValue: 'featureName' }]`
         * Template: `*transloco="let t"` and use full path `t('featureName.key')`
         * TS: `this.transloco.translate('featureName.key')`
         * AVOID: `read` property in `*transloco` (deprecated)
@@ -85,6 +100,21 @@ docs/                       → Build output (deployed to GitHub Pages)
 * Descriptive variable names (no single letters except loop counters)
 * Comment WHY, not WHAT – skip obvious comments
 * Error handling that fails with useful messages
+* NEVER put styles inline in `.ts` — always separate `.css` file (`styleUrl`)
+* NEVER put templates inline in `.ts` for non-trivial components — always separate `.html` file (`templateUrl`)
+
+## Auth & Roles
+* `AuthService` (in `auth/states/authFacade.ts`) exposes:
+    * `isLoggedIn()` → signal, true if JWT present
+    * `isGuest()` → computed, `!isLoggedIn()`
+    * `isAdmin()` → computed, `isLoggedIn && role === 'admin'`
+* Role decoded from JWT payload on login and restored from localStorage on app start
+* No route guards — do inline checks in `ngOnInit`:
+    ```typescript
+    if (!this.auth.isLoggedIn()) { this.router.navigate(['/login']); return; }
+    if (!this.auth.isAdmin())    { this.router.navigate(['/']);      return; }
+    ```
+* Header nav links for role-restricted pages: wrap with `@if (auth.isAdmin())`
 
 ## How I Want You to Work
 * Read existing code before changing anything
