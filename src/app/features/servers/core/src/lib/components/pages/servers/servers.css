@@ -111,6 +111,11 @@
   box-shadow: 0 0 6px rgba(255, 193, 7, 0.4);
 }
 
+.status-dot.offline {
+  background: #f44336;
+  box-shadow: 0 0 6px rgba(244, 67, 54, 0.5);
+}
+
 .server-name {
   color: rgba(255, 245, 210, 0.92);
   font-size: 1.2em;
@@ -143,6 +148,7 @@
 .amp-status-installing,
 .amp-status-updating { color: #42a5f5; }
 .amp-status-failed   { color: #f44336; }
+.status-offline      { color: #f44336 !important; }
 
 .players {
   color: rgba(255, 245, 210, 0.65);

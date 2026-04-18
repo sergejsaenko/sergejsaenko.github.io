@@ -19,11 +19,16 @@ export class Servers implements OnInit {
     const filtered = term
       ? list.filter(s => (s.friendlyName ?? '').toLowerCase().includes(term))
       : list.slice();
-    // sort: running first, keep relative order otherwise
+    // sort: running status first
     filtered.sort((a, b) => {
       const aRunning = (a.status ?? '').toLowerCase() === 'running' ? 0 : 1;
       const bRunning = (b.status ?? '').toLowerCase() === 'running' ? 0 : 1;
-      return aRunning - bRunning;
+      if (aRunning !== bRunning) return aRunning - bRunning;
+
+      // if both running, prefer 'Running' ampStatus over 'Idle'
+      const aAmpRunning = (a.ampStatus ?? '').toLowerCase() === 'running' ? 0 : 1;
+      const bAmpRunning = (b.ampStatus ?? '').toLowerCase() === 'running' ? 0 : 1;
+      return aAmpRunning - bAmpRunning;
     });
     return filtered;
   });
