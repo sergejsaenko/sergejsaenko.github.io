@@ -22,17 +22,25 @@
   @if (!loading() && !error()) {
     <div class="servers-grid">
       @for (server of filteredServers(); track server.friendlyName) {
-        <div class="server-card" [class.offline]="server.status !== 'running'">
+        <div class="server-card" [class.offline]="server.status === 'stopped' && server.ampStatus === 'Idle'">
           <div class="server-header">
             <span class="status-dot"
               [class.online]="server.ampStatus === 'Running'"
-              [class.idle]="server.ampStatus === 'Idle'">
+              [class.idle]="server.status === 'running' && server.ampStatus === 'Idle'"
+              [class.offline]="server.status === 'stopped' && server.ampStatus === 'Idle'">
             </span>
             <span class="server-name">{{ server.friendlyName }}</span>
           </div>
           <div class="server-meta">
-            <span class="status-label amp-status-{{ server.ampStatus | lowercase }}">
-              {{ server.ampStatus }}
+            <span class="status-label amp-status-{{ server.ampStatus | lowercase }}"
+              [class.status-offline]="server.status === 'stopped' && server.ampStatus === 'Idle'">
+              @if (server.status === 'stopped' && server.ampStatus === 'Idle') {
+                Offline
+              } @else if (server.status === 'running' && server.ampStatus === 'Idle') {
+                Idle
+              } @else {
+                {{ server.ampStatus }}
+              }
             </span>
             <span class="connection-info">IP: {{ parseBrandUrl(server.brandUrl).host }}</span>
             <span class="connection-info">Port: {{ parseBrandUrl(server.brandUrl).port }}</span>
